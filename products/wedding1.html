@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Свадебный торт «Нежность» | Торты на заказ SharKOва cake</title>
+    <meta name="description" content="Свадебный торт «Нежность» – элегантный двухъярусный торт с живыми цветами, начинка Крем чиз с клубнично-банановым конфи. Закажите в Астрахани!">
+    
+    <!-- Подключаем шрифты и общие стили -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Дополнительные стили только для страницы товара -->
+    <style>
+        /* Стили страницы товара (дополнительные к общим) */
+        .product-page {
+            padding: 40px 0 60px;
+        }
+
+        .product-container {
+            display: flex;
+            gap: 50px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            align-items: flex-start;
+        }
+
+        /* Левая колонка – галерея */
+        .product-gallery {
+            flex: 1 1 50%;
+        }
+
+        .product-main-image {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(44, 26, 14, 0.10);
+            background: #FAF7F2;
+        }
+
+        .product-thumbnails {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .product-thumbnails img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border 0.2s;
+        }
+
+        .product-thumbnails img:hover {
+            border-color: #B5704B;
+        }
+
+        /* Правая колонка – детали */
+        .product-details {
+            flex: 1 1 50%;
+        }
+
+        .product-details h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: #2C1A0E;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .product-details .product-subtitle {
+            font-size: 16px;
+            color: #7A6555;
+            margin-bottom: 20px;
+        }
+
+        .product-details .product-description {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #2C1A0E;
+            margin-bottom: 25px;
+        }
+
+        .product-details .product-params {
+            background: #FAF7F2;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .product-params p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+
+        .product-params strong {
+            color: #B5704B;
+        }
+
+        .product-price-block {
+            margin-bottom: 25px;
+        }
+
+        .product-price-block .price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #B5704B;
+        }
+
+        .product-price-block .price-note {
+            font-size: 14px;
+            color: #7A6555;
+            display: block;
+            margin-top: 4px;
+        }
+
+        /* Кнопка заказа */
+        .product-order-btn {
+            display: inline-block;
+            background: #B5704B;
+            color: #FFF;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            text-decoration: none;
+        }
+
+        .product-order-btn:hover {
+            background: #C98B5C;
+            transform: translateY(-2px);
+        }
+
+        /* Адаптив для мобильных */
+        @media (max-width: 768px) {
+            .product-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .product-details h1 {
+                font-size: 26px;
+            }
+
+            .product-price-block .price {
+                font-size: 24px;
+            }
+
+            .product-thumbnails img {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ШАПКА (копируем с index.html) ===== -->
+    <header class="site-header">
+        <div class="logo">🎂 Торты на Заказ г.Астрахань</div>
+        <nav class="site-nav">
+            <a href="../index.html#catalog">Наши торты</a>
+            <a href="../index.html#order-form-section">Рассчитать стоимость</a>
+        </nav>
+        <div class="phone">📞 +7 (988) 177-64-58</div>
+    </header>
+
+    <!-- ===== СТРАНИЦА ТОВАРА ===== -->
+    <main class="product-page">
+        <div class="product-container">
+
+            <!-- Левая часть: галерея -->
+            <div class="product-gallery">
+                <img src="../images/catalog/wedding1.jpg" alt="Свадебный торт Нежность" class="product-main-image" id="mainImage">
+                <div class="product-thumbnails">
+                    <img src="../images/products/wedding1-1.jpg" alt="Фото 1" onclick="changeImage(this.src)">
+                    <img src="../images/products/wedding2-2.png" alt="Фото 2" onclick="changeImage(this.src)">
+                    <img src="../images/products/wedding3-3.jpg" alt="Фото 3" onclick="changeImage(this.src)">
+                </div>
+                <p style="font-size:13px; color:#7A6555; margin-top:8px;">* Нажмите на миниатюру, чтобы увеличить фото</p>
+            </div>
+
+            <!-- Правая часть: детали -->
+            <div class="product-details">
+                <h1>Свадебный торт «Нежность»</h1>
+                <p class="product-subtitle">Элегантный двухъярусный торт с топерами сверху</p>
+
+                <div class="product-description">
+                    <p>Идеальный выбор для вашей свадьбы! Нежный ванильный бисквит в сочетании с кремом чиз и клубнично-банановым конфи. Верхний ярус украшен золотым топером, нижний – изящной золотой полоской. Торт не приторный, тает во рту и выглядит как произведение искусства.</p>
+                </div>
+
+                <div class="product-params">
+                    <p><strong>⚖️ Вес:</strong> от 4 до 10 кг (на ваш выбор)</p>
+                    <p><strong>🍰 Начинка:</strong> Крем чиз с клубнично-банановым конфи</p>
+                    <p><strong>🎨 Декор:</strong> Живые цветы, золотая фольга, мраморная глазурь</p>
+                    <p><strong>⏰ Срок изготовления:</strong> 2–3 дня</p>
+                </div>
+
+                <div class="product-price-block">
+                    <span class="price">от 7 500 ₽</span>
+                    <span class="price-note">* Точная стоимость зависит от веса и сложности декора</span>
+                </div>
+
+                <!-- Кнопка заказа – скроллит к форме на главной -->
+                <a href="../index.html#order-form-section" class="product-order-btn" onclick="setCakeName('Свадебный торт «Нежность»')">Заказать этот торт</a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ===== ПОДВАЛ (копируем с index.html) ===== -->
+    <footer class="site-footer">
+        <p class="footer-text">© 2026 Торты на заказ. С любовью к каждому клиенту.</p>
+        <div class="footer-contacts">
+            <a href="https://wa.me/79170816525?text=Привет%21%20Хочу%20заказать%20торт" class="contact-link whatsapp" target="_blank">
+                <img src="../images/logo/WhatsApp_logo-color-vertical.svg.webp" alt="WhatsApp" width="24" height="24" style="vertical-align:middle; margin-right:8px;">
+                Написать в WhatsApp
+            </a>
+            <a href="https://t.me/ваш_username" class="contact-link telegram" target="_blank">
+                <img src="../images/logo/Telegram_2019_Logo.svg.webp" alt="Telegram" width="24" height="24" style="vertical-align:middle; margin-right:8px;">
+                Написать в Telegram
+            </a>
+            <a href="https://max.ru/u/f9LHodD0cOLYQq51SfQPaaQOz8GkIMK5_IvAtXiSyLAyNAZmZk75qnrLQA4" class="contact-link max" target="_blank">
+                <img src="../images/logo/Логотип_MAX.svg.webp" alt="MAX" width="24" height="24" style="vertical-align:middle; margin-right:6px;">
+                Написать в MAX
+            </a>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+
+    <!-- Специальный скрипт для этой страницы -->
+    <script>
+        // Функция смены главного фото при клике на миниатюру
+        function changeImage(src) {
+            document.getElementById('mainImage').src = src;
+        }
+
+        // Функция для передачи названия торта в форму на главной
+        function setCakeName(name) {
+            // Сохраняем в localStorage, чтобы на главной странице подхватить
+            localStorage.setItem('selectedCake', name);
+        }
+
+        // Если на главной есть скрипт, который читает localStorage – он подставит название
+    </script>
+
+</body>
+</html>
