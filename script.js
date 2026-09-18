@@ -47,7 +47,7 @@ const fillingSelect = document.getElementById("fillingSelect");
 const urgentCheckbox = document.getElementById("urgentCheckbox");
 const calculateBtn = document.getElementById("calculateBtn");
 const resultText = document.getElementById("resultText");
-const grandTotalText = document.getElementById("grandTotalText"); // Новый элемент
+const grandTotalText = document.getElementById("grandTotalText");
 
 function handleCalculation() {
     if (!weightInput || !fillingSelect || !resultText) return;
@@ -55,13 +55,13 @@ function handleCalculation() {
     const weight = parseFloat(weightInput.value);
     const pricePerKg = parseFloat(fillingSelect.value);
     
-    // Считаем сумму товаров в корзине прямо сейчас
+    // Считаем чистую сумму товаров в корзине прямо сейчас
     const cartTotalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
     let cakePriceOnly = 0;
     let hasCustomCake = false;
 
-    // Проверяем, ввёл ли пользователь корректный вес для заказного торта
+    // Калькулятор считает цену только в том случае, если на экране вес больше 0!
     if (!isNaN(weight) && weight > 0) {
         cakePriceOnly = weight * pricePerKg;
         hasCustomCake = true;
@@ -71,42 +71,85 @@ function handleCalculation() {
         }
     }
 
-    // Стоимость всех сладостей вместе (кастомный торт + готовые из корзины)
+    // Общая стоимость сладостей (кастомный торт + корзина)
     const totalGoodsPrice = cakePriceOnly + cartTotalAmount;
 
-    // Рассчитываем доставку на основе общей суммы заказа
+    // Расчет условий доставки
     let delivery = 500;
     if (totalGoodsPrice >= 8000 || totalGoodsPrice === 0) {
-        delivery = 0; // Бесплатная доставка от 8000 руб или если ничего не выбрано
+        delivery = 0; // Бесплатная доставка от 8000 руб за заказ или если корзина пуста
     }
 
-    // Итоговый чек
     const finalPrice = totalGoodsPrice + delivery;
 
-    // 1. Формируем текст для кастомного торта
+    // Вывод информации в текстовую подсказку
     if (hasCustomCake) {
-        let message = `Торт на заказ: ${cakePriceOnly.toFixed(0)} руб. (Доставка: ${delivery} руб.)`;
+        let message = `Торт на заказ (${weight} кг): ${cakePriceOnly.toFixed(0)} руб.`;
         if (urgentCheckbox && urgentCheckbox.checked) {
-            message += ` ⚠️ Включена наценка 20% за срочность!`;
+            message += ` ⚠️ Добавлена наценка за срочность 20%!`;
         }
         resultText.textContent = message;
     } else {
         resultText.textContent = cartTotalAmount > 0 
-          ? `В калькуляторе вес не указан. Доставка для товаров из корзины: ${delivery} руб.` 
-          : "Введите вес торта или добавьте готовые товары в корзину.";
+          ? `Вы заказываете готовые торты. Доставка: ${delivery === 0 ? 'Бесплатно' : delivery + ' руб.'}` 
+          : "Выберите готовый торт или укажите вес кнопками для кастомного торта.";
     }
 
-    // 2. Обновляем главный итоговый ценник за ВСЁ
+    // Вывод на главный итоговый счетчик за ВСЁ
     if (grandTotalText) {
-        grandTotalText.innerHTML = `Итого к оплате за всё: <span style="font-size: 24px; font-weight: 700;">${finalPrice.toFixed(0)} руб.</span>`;
+        grandTotalText.innerHTML = `Итого к оплате за всё: <span style="font-size: 24px; font-weight: 700; color: #B5704B;">${finalPrice.toFixed(0)} руб.</span>`;
     }
 }
 
-// Слушатели событий калькулятора
-if (weightInput) weightInput.addEventListener("input", handleCalculation);
+// Навешиваем обработчики на выбор начинки, галочку срочности и кнопку
 if (fillingSelect) fillingSelect.addEventListener("change", handleCalculation);
 if (urgentCheckbox) urgentCheckbox.addEventListener("change", handleCalculation);
 if (calculateBtn) calculateBtn.addEventListener("click", handleCalculation);
+
+
+// ===== ЛОГИКА КНОПОК «ПЛЮС» И «МИHУС» ДЛЯ ВЕСА =====
+const weightMinusBtn = document.getElementById("weightMinusBtn");
+const weightPlusBtn = document.getElementById("weightPlusBtn");
+
+const MIN_WEIGHT = 1;   // Наш минимальный порог в 1 кг
+const MAX_WEIGHT = 30;  // Максимальный порог для защиты от случайных кликов
+
+if (weightPlusBtn) {
+  weightPlusBtn.addEventListener("click", function() {
+    let currentWeight = parseFloat(weightInput.value);
+    
+    // Если сейчас стоит 0, значит первое нажатие на Плюс сразу ставит минимальный 1 кг
+    if (currentWeight === 0) {
+      weightInput.value = MIN_WEIGHT;
+    } 
+    // Если вес уже есть, но он еще не дошел до лимита в 30кг — просто прибавляем 1 кг
+    else if (currentWeight < MAX_WEIGHT) {
+      weightInput.value = currentWeight + 1;
+    }
+    
+    // После изменения цифры принудительно пересчитываем чеки
+    handleCalculation();
+  });
+}
+
+if (weightMinusBtn) {
+  weightMinusBtn.addEventListener("click", function() {
+    let currentWeight = parseFloat(weightInput.value);
+    
+    // Если на экране горит минимальный порог 1 кг, то клик по Минусу сбрасывает вес в 0 кг.
+    // Это означает: "Я передумал заказывать индивидуальный торт, хочу только товары из корзины".
+    if (currentWeight === MIN_WEIGHT) {
+      weightInput.value = 0;
+    } 
+    // Если вес большой (например, 4 кг), то при клике на Минус плавно уменьшаем его на 1 кг
+    else if (currentWeight > MIN_WEIGHT) {
+      weightInput.value = currentWeight - 1;
+    }
+    
+    // Пересчитываем чеки, чтобы общая сумма уменьшилась
+    handleCalculation();
+  });
+}
 
 
 // ===== ЛОГИКА КОРЗИНЫ ТОВАРОВ =====
@@ -114,7 +157,6 @@ if (calculateBtn) calculateBtn.addEventListener("click", handleCalculation);
 function saveCart() {
   localStorage.setItem('sharkova_cake_cart', JSON.stringify(cart));
   renderCart();
-  // Пересчитываем калькулятор автоматически при любом изменении корзины!
   handleCalculation(); 
 }
 

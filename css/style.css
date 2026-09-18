@@ -778,4 +778,70 @@ padding: 10px 0;
     margin-top: 5px;
   }
 }
+
+/* ===== СТИЛИ ДЛЯ КНОПОК ПЛЮС И МИНУС В КАЛЬКУЛЯТОРЕ ===== */
+.weight-increment-container {
+  display: flex;
+  align-items: center;
+  max-width: 170px;          /* Коробочка будет компактной и аккуратной */
+  background-color: #FAF7F2; /* Наш кремовый фон */
+  border: 1px solid #DDD0BF; /* Мягкая кофейная рамка */
+  border-radius: 8px;
+  overflow: hidden;          /* Чтобы углы кнопок не торчали */
+  margin-top: 5px;
+}
+
+.weight-btn {
+  width: 45px;
+  height: 45px;
+  background: #B5704B;       /* Наш фирменный карамельный цвет */
+  color: #FFFFFF;
+  border: none;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;         /* Чтобы текст на кнопке не выделялся синим при частых кликах */
+  transition: background-color 0.2s;
+}
+
+.weight-btn:hover {
+  background-color: #C98B5C; /* При наведении кнопка станет чуть светлее */
+}
+
+.weight-btn:active {
+  transform: scale(0.95);    /* Эффект физического нажатия кнопки */
+}
+
+.weight-value-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  position: relative;
+}
+
+#weightInput {
+  width: 100%;
+  height: 45px;
+  border: none;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2C1A0E;
+  padding: 0 15px 0 0;       /* Отступ справа, чтобы цифра не врезалась в буквы "кг" */
+  background: transparent;
+}
+
+.weight-unit {
+  position: absolute;
+  right: 8px;
+  font-size: 13px;
+  color: #7A6555;
+  pointer-events: none;      /* Чтобы клик мыши проходил сквозь буквы в поле */
+}
+
 }
