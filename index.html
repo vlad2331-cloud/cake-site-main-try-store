@@ -264,6 +264,9 @@
   <!-- Ваша рабочая форма Formspree для отправки заявок на почту -->
   <form class="order-form" action="https://formspree.io/f/mjybdojk" method="POST">
 
+    <!-- СЮДА ДОБАВЛЯЕМ СКРЫТОЕ ПОЛЕ ДЛЯ ДЕТАЛЕЙ ЗАКАЗА -->
+  <input type="hidden" id="orderDetailsInput" name="Заказ_Детали">
+
     <!-- Поле для имени -->
     <div class="form-group">
       <label for="username">Ваше имя:</label>
