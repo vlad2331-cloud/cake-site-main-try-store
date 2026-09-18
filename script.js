@@ -51,7 +51,6 @@ function saveCart() {
 function renderCart() {
   const cartBadge = document.getElementById('cartBadge');
   
-  // Обновляем количество разных тортов на значке в шапке сайта
   if (cartBadge) {
     cartBadge.textContent = cart.length;
     if (cart.length === 0) cartBadge.classList.add('empty');
@@ -61,26 +60,38 @@ function renderCart() {
   if (!cartItemsList || !cartTotalSum) return;
   cartItemsList.innerHTML = '';
 
-  // Сценарий: Если в корзине пусто
   if (cart.length === 0) {
     cartItemsList.innerHTML = '<li class="empty-cart-message">Вы пока не выбрали готовые торты</li>';
     cartTotalSum.textContent = '0';
     if (resultText) resultText.textContent = "Добавьте торты в корзину для расчета стоимости и доставки.";
     if (grandTotalText) grandTotalText.innerHTML = `Итого к оплате за всё: <span style="font-size: 24px; font-weight: 700; color: #B5704B;">0 руб.</span>`;
+    
+    // Если корзина пуста, очищаем скрытое поле
+    const orderDetailsInput = document.getElementById('orderDetailsInput');
+    if (orderDetailsInput) orderDetailsInput.value = '';
     return;
   }
 
   let totalGoodsPrice = 0;
+  let textForEmail = ''; // Переменная, где мы соберем текст для письма
 
-  // Циклом проходим по всем тортам в корзине и генерируем для них HTML с кнопками и селектами
   cart.forEach((item, index) => {
     let itemPriceOnly = item.weight * item.pricePerKg;
     
+    // Определяем название начинки для текста
+    let fillingName = "Крем чиз + клубника-банан";
+    if (item.fillingPrice === 2100) fillingName = "Пломбир + малина-яблоко";
+    if (item.fillingPrice === 2200) fillingName = "Шоколадный + вишня";
+    if (item.fillingPrice === 2300) fillingName = "Белый шоколад + клубника";
+
     if (item.urgent) {
       itemPriceOnly = itemPriceOnly * 1.2;
     }
 
     totalGoodsPrice += itemPriceOnly;
+
+    // Собираем красивую строчку для скрытого поля формы
+    textForEmail += `${index + 1}. ${item.name} (${item.weight} кг) | Начинка: ${fillingName} | Срочно: ${item.urgent ? 'Да' : 'Нет'} | Цена: ${Math.round(itemPriceOnly)} руб.\n`;
 
     const li = document.createElement('li');
     li.className = 'cart-item';
@@ -94,14 +105,12 @@ function renderCart() {
       </div>
       
       <div class="cart-item-options">
-        <!-- Кнопки плюс / минус веса -->
         <div class="cart-weight-box">
           <button type="button" class="cart-weight-btn minus-weight" data-index="${index}">−</button>
           <div class="cart-weight-value">${item.weight} кг</div>
           <button type="button" class="cart-weight-btn plus-weight" data-index="${index}">+</button>
         </div>
 
-        <!-- Выбор начинки -->
         <select class="cart-select-filling" data-index="${index}">
           <option value="2000" ${item.fillingPrice === 2000 ? 'selected' : ''}>Крем чиз + клубника-банан</option>
           <option value="2100" ${item.fillingPrice === 2100 ? 'selected' : ''}>Пломбир + малина-яблоко</option>
@@ -109,7 +118,6 @@ function renderCart() {
           <option value="2300" ${item.fillingPrice === 2300 ? 'selected' : ''}>Белый шоколад + клубника</option>
         </select>
 
-        <!-- Галочка срочности -->
         <label class="cart-urgent-label">
           <input type="checkbox" class="cart-urgent-checkbox" data-index="${index}" ${item.urgent ? 'checked' : ''}>
           🔥 Срочно (+20%)
@@ -128,6 +136,16 @@ function renderCart() {
 
   const finalPrice = totalGoodsPrice + delivery;
 
+  // Дописываем в текст письма информацию о доставке и финальную сумму
+  textForEmail += `\nДоставка: ${delivery === 0 ? 'Бесплатно' : delivery + ' руб.'}\n`;
+  textForEmail += `ИТОГО К ОПЛАТЕ ЗА ВСЁ: ${Math.round(finalPrice)} руб.`;
+
+  // 🔥 ЗАПИСЫВАЕМ СФОРМИРОВАННЫЙ ТЕКСТ В СКРЫТОЕ ПОЛЕ HTML ФОРМЫ
+  const orderDetailsInput = document.getElementById('orderDetailsInput');
+  if (orderDetailsInput) {
+    orderDetailsInput.value = textForEmail;
+  }
+
   if (resultText) {
     resultText.textContent = `Стоимость сладостей: ${Math.round(totalGoodsPrice).toLocaleString()} руб. | Доставка: ${delivery === 0 ? 'Бесплатно' : delivery + ' руб.'}`;
   }
@@ -135,6 +153,7 @@ function renderCart() {
     grandTotalText.innerHTML = `Итого к оплате за всё: <span style="font-size: 24px; font-weight: 700; color: #B5704B;">${Math.round(finalPrice).toFixed(0)} руб.</span>`;
   }
 }
+
 
 // ===== СВЕРХНАДЁЖНАЯ ФУНКЦИЯ ДОБАВЛЕНИЯ ТОВАРА С ВИТРИНЫ =====
 function addToCart(name, startPriceText, startWeightText) {
