@@ -244,96 +244,52 @@
   </div> <!-- /reviews-container -->
 </section>
 
-     <!-- Раздел с формой заказа -->
-  <section class="order-section" id="order-form-section">
-<!-- Вставляем перед кнопкой "Узнать стоимость" -->
-<div style="margin: 15px 0;">
-    <input type="checkbox" id="urgentCheckbox">
-    <label for="urgentCheckbox" style="font-weight: bold; color: #ff4500; cursor: pointer;">
-        🔥 Срочный заказ (изготовление менее чем за 24 часа, +20% к стоимости)
-    </label>
-</div>
+  <!-- Раздел с формой заказа -->
+<section class="order-section" id="order-form-section">
 
-    <h2>Рассчитать стоимость торта</h2>
-    <p>Оставьте заявку, и мы свяжемся с вами в течение 15 минут для обсуждения деталей!</p>
+  <h2>Оформление заказа</h2>
+  <p>Оставьте заявку, и мы свяжемся с вами в течение 15 минут для обсуждения деталей!</p>
 
-    <form class="order-form" action="https://formspree.io/f/mjybdojk" method="POST">
-
-      <!-- Вставьте этот блок там, где хотите видеть корзину (например, перед формой ввода имени) -->
-<div id="cartContainer" class="cart-container">
-  <h3>🛒 Ваша корзина</h3>
-  <ul id="cartItemsList" class="cart-items-list">
-    <li class="empty-cart-message">Вы пока не выбрали готовые торты</li>
-  </ul>
-  <div class="cart-total">
-    <strong>Стоимость товаров: <span id="cartTotalSum">0</span> ₽</strong>
-  </div>
-</div>
-
-      <!-- Поле для имени -->
-      <div class="form-group">
-        <label for="username">Ваше имя:</label>
-        <input type="text" id="username" name="name" placeholder="Иван Иванов" required>
-      </div>
-
-      <!-- Поле для телефона -->
-      <div class="form-group">
-        <label for="userphone">Номер телефона:</label>
-        <input type="tel" id="userphone" name="phone" placeholder="+7 (999) 123-45-67" required>
-      </div>
-
-      <!-- Выпадающий список начинок -->
-            <!-- Выпадающий список ваших фирменных начинок -->
-      <div class="form-group">
-        <label for="fillingSelect">Выберите начинку:</label>
-<select id="fillingSelect">
-    <option value="2200">Крем чиз с клубнично-банановым конфи</option>
-    <option value="2400">Пломбирный Крем с Малиново-яблочным конфи</option>
-    <option value="2600">Шоколадный крем с вишнёвым конфи</option>
-    <option value="2800">Белый шоколад с клубничным конфи</option>
-</select>
-
-          <!-- 🌟 СЮДА ДОБАВЛЯЕМ НАШЕ НОВОЕ ПОЛЕ ДЛЯ ВЕСА -->
-  <div class="form-group">
-  <label>Желаемый вес торта (кг):</label>
-  
-  <!-- НОВЫЙ БЛОК КНОПОК ИНКРЕМЕНТА -->
-  <div class="weight-increment-container">
-    <button type="button" class="weight-btn minus" id="weightMinusBtn">−</button>
-    <div class="weight-value-wrapper">
-      <!-- Изначально стоит 0 (индивидуальный торт не выбран). Поле заблокировано от клавиатуры (readonly) -->
-      <input type="text" id="weightInput" value="0" readonly>
-      <span class="weight-unit">кг</span>
+  <!-- Блок корзины (Сюда JavaScript сам вставит выбранные торты с кнопками веса, начинками и галочками срочности) -->
+  <div id="cartContainer" class="cart-container">
+    <h3>🛒 Ваша корзина</h3>
+    <ul id="cartItemsList" class="cart-items-list">
+      <li class="empty-cart-message">Вы пока не выбрали готовые торты</li>
+    </ul>
+    <div class="cart-total">
+      <strong>Стоимость товаров: <span id="cartTotalSum">0</span> ₽</strong>
     </div>
-    <button type="button" class="weight-btn plus" id="weightPlusBtn">+</button>
   </div>
-</div>
 
+  <!-- Ваша рабочая форма Formspree для отправки заявок на почту -->
+  <form class="order-form" action="https://formspree.io/f/mjybdojk" method="POST">
 
-    <!-- 🌟 ДОБАВЛЯЕМ ID НАШЕЙ КНОПКЕ (чтобы JS её нашёл) -->
-    <button type="button" id="calculateBtn">Узнать стоимость</button>
+    <!-- Поле для имени -->
+    <div class="form-group">
+      <label for="username">Ваше имя:</label>
+      <input type="text" id="username" name="name" placeholder="Иван Иванов" required>
+    </div>
 
-    <!-- 🌟 СЮДА ДОБАВЛЯЕМ БЛОК ДЛЯ ВЫВОДА РЕЗУЛЬТАТА -->
-    <p id="resultText" style="font-weight: bold; margin-top: 15px; color: #d2691e;">
-      <!-- Ваша секция калькулятора стоимости -->
-<div class="form-group">
-</div>
+    <!-- Поле для телефона -->
+    <div class="form-group">
+      <label for="userphone">Номер телефона:</label>
+      <input type="tel" id="userphone" name="phone" placeholder="+7 (999) 123-45-67" required>
+    </div>
 
-<!-- ОБНОВЛЕННЫЙ БЛОК РЕЗУЛЬТАТОВ -->
-<div class="calculation-results" style="margin-top: 20px; text-align: left;">
-  <p id="resultText" style="font-weight: 500; margin-bottom: 8px;"></p>
-  <h3 id="grandTotalText" style="font-family: 'Playfair Display', serif; color: #B5704B; margin-top: 15px; font-size: 22px;">
-    Итого к оплате за всё: 0 руб.
-  </h3>
-</div>
-    </p>
-      </div>
+    <!-- Блок вывода финального чека за весь заказ -->
+    <div class="calculation-results" style="margin-top: 20px; text-align: left; margin-bottom: 25px;">
+      <p id="resultText" style="font-weight: 500; margin-bottom: 8px; color: #7A6555;"></p>
+      <h3 id="grandTotalText" style="font-family: 'Playfair Display', serif; color: #B5704B; margin-top: 15px; font-size: 22px; margin-bottom: 0;">
+        Итого к оплате за всё: <span style="font-weight: 700;">0 руб.</span>
+      </h3>
+    </div>
 
+    <!-- Главная и единственная кнопка отправки формы -->
+    <button type="submit" class="submit-btn">Отправить заказ в кондитерскую</button>
 
-      <!-- Кнопка отправки -->
-      <button type="submit" class="submit-btn">Узнать стоимость</button>
-    </form>
-  </section>
+  </form>
+</section>
+
 
 <!-- Подвал сайта с контактами -->
  <!-- Раздел с картой проезда -->

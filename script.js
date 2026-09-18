@@ -4,11 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   function filterProducts(category) {
     const gridItems = document.querySelectorAll('.products-grid > .product-link');
-
     gridItems.forEach(item => {
       const productCard = item.querySelector('.product-card');
       if (!productCard) return;
-
       const productCategory = productCard.dataset.category;
 
       if (category === 'all' || productCategory === category) {
@@ -40,236 +38,234 @@ document.addEventListener('DOMContentLoaded', function() {
 let cart = JSON.parse(localStorage.getItem('sharkova_cake_cart')) || [];
 const cartItemsList = document.getElementById('cartItemsList');
 const cartTotalSum = document.getElementById('cartTotalSum');
-
-// ===== ОБНОВЛЕННЫЙ КАЛЬКУЛЯТОР СТОИМОСТИ (ИНТЕГРИРОВАН С КОРЗИНОЙ) =====
-const weightInput = document.getElementById("weightInput");
-const fillingSelect = document.getElementById("fillingSelect");
-const urgentCheckbox = document.getElementById("urgentCheckbox");
-const calculateBtn = document.getElementById("calculateBtn");
 const resultText = document.getElementById("resultText");
 const grandTotalText = document.getElementById("grandTotalText");
 
-function handleCalculation() {
-    if (!weightInput || !fillingSelect || !resultText) return;
-
-    const weight = parseFloat(weightInput.value);
-    const pricePerKg = parseFloat(fillingSelect.value);
-    
-    // Считаем чистую сумму товаров в корзине прямо сейчас
-    const cartTotalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-    let cakePriceOnly = 0;
-    let hasCustomCake = false;
-
-    // Калькулятор считает цену только в том случае, если на экране вес больше 0!
-    if (!isNaN(weight) && weight > 0) {
-        cakePriceOnly = weight * pricePerKg;
-        hasCustomCake = true;
-
-        if (urgentCheckbox && urgentCheckbox.checked) {
-            cakePriceOnly = cakePriceOnly * 1.2;
-        }
-    }
-
-    // Общая стоимость сладостей (кастомный торт + корзина)
-    const totalGoodsPrice = cakePriceOnly + cartTotalAmount;
-
-    // Расчет условий доставки
-    let delivery = 500;
-    if (totalGoodsPrice >= 8000 || totalGoodsPrice === 0) {
-        delivery = 0; // Бесплатная доставка от 8000 руб за заказ или если корзина пуста
-    }
-
-    const finalPrice = totalGoodsPrice + delivery;
-
-    // Вывод информации в текстовую подсказку
-    if (hasCustomCake) {
-        let message = `Торт на заказ (${weight} кг): ${cakePriceOnly.toFixed(0)} руб.`;
-        if (urgentCheckbox && urgentCheckbox.checked) {
-            message += ` ⚠️ Добавлена наценка за срочность 20%!`;
-        }
-        resultText.textContent = message;
-    } else {
-        resultText.textContent = cartTotalAmount > 0 
-          ? `Вы заказываете готовые торты. Доставка: ${delivery === 0 ? 'Бесплатно' : delivery + ' руб.'}` 
-          : "Выберите готовый торт или укажите вес кнопками для кастомного торта.";
-    }
-
-    // Вывод на главный итоговый счетчик за ВСЁ
-    if (grandTotalText) {
-        grandTotalText.innerHTML = `Итого к оплате за всё: <span style="font-size: 24px; font-weight: 700; color: #B5704B;">${finalPrice.toFixed(0)} руб.</span>`;
-    }
-}
-
-// Навешиваем обработчики на выбор начинки, галочку срочности и кнопку
-if (fillingSelect) fillingSelect.addEventListener("change", handleCalculation);
-if (urgentCheckbox) urgentCheckbox.addEventListener("change", handleCalculation);
-if (calculateBtn) calculateBtn.addEventListener("click", handleCalculation);
-
-
-// ===== ЛОГИКА КНОПОК «ПЛЮС» И «МИHУС» ДЛЯ ВЕСА =====
-const weightMinusBtn = document.getElementById("weightMinusBtn");
-const weightPlusBtn = document.getElementById("weightPlusBtn");
-
-const MIN_WEIGHT = 1;   // Наш минимальный порог в 1 кг
-const MAX_WEIGHT = 30;  // Максимальный порог для защиты от случайных кликов
-
-if (weightPlusBtn) {
-  weightPlusBtn.addEventListener("click", function() {
-    let currentWeight = parseFloat(weightInput.value);
-    
-    // Если сейчас стоит 0, значит первое нажатие на Плюс сразу ставит минимальный 1 кг
-    if (currentWeight === 0) {
-      weightInput.value = MIN_WEIGHT;
-    } 
-    // Если вес уже есть, но он еще не дошел до лимита в 30кг — просто прибавляем 1 кг
-    else if (currentWeight < MAX_WEIGHT) {
-      weightInput.value = currentWeight + 1;
-    }
-    
-    // После изменения цифры принудительно пересчитываем чеки
-    handleCalculation();
-  });
-}
-
-if (weightMinusBtn) {
-  weightMinusBtn.addEventListener("click", function() {
-    let currentWeight = parseFloat(weightInput.value);
-    
-    // Если на экране горит минимальный порог 1 кг, то клик по Минусу сбрасывает вес в 0 кг.
-    // Это означает: "Я передумал заказывать индивидуальный торт, хочу только товары из корзины".
-    if (currentWeight === MIN_WEIGHT) {
-      weightInput.value = 0;
-    } 
-    // Если вес большой (например, 4 кг), то при клике на Минус плавно уменьшаем его на 1 кг
-    else if (currentWeight > MIN_WEIGHT) {
-      weightInput.value = currentWeight - 1;
-    }
-    
-    // Пересчитываем чеки, чтобы общая сумма уменьшилась
-    handleCalculation();
-  });
-}
-
-
-// ===== ЛОГИКА КОРЗИНЫ ТОВАРОВ =====
-
+// ===== ФУНКЦИЯ СОХРАНЕНИЯ И СИНХРОНИЗАЦИИ =====
 function saveCart() {
   localStorage.setItem('sharkova_cake_cart', JSON.stringify(cart));
   renderCart();
-  handleCalculation(); 
 }
 
+// ===== УМНАЯ ОТРИСОВКА КОРЗИНЫ С УПРАВЛЕНИЕМ ВЕСОМ =====
 function renderCart() {
   const cartBadge = document.getElementById('cartBadge');
-  const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-
+  
+  // Обновляем количество разных тортов на значке в шапке сайта
   if (cartBadge) {
-    cartBadge.textContent = totalCount;
-    if (totalCount === 0) {
-      cartBadge.classList.add('empty');
-    } else {
-      cartBadge.classList.remove('empty');
-    }
+    cartBadge.textContent = cart.length;
+    if (cart.length === 0) cartBadge.classList.add('empty');
+    else cartBadge.classList.remove('empty');
   }
 
   if (!cartItemsList || !cartTotalSum) return;
-
   cartItemsList.innerHTML = '';
 
+  // Сценарий: Если в корзине пусто
   if (cart.length === 0) {
     cartItemsList.innerHTML = '<li class="empty-cart-message">Вы пока не выбрали готовые торты</li>';
     cartTotalSum.textContent = '0';
+    if (resultText) resultText.textContent = "Добавьте торты в корзину для расчета стоимости и доставки.";
+    if (grandTotalText) grandTotalText.innerHTML = `Итого к оплате за всё: <span style="font-size: 24px; font-weight: 700; color: #B5704B;">0 руб.</span>`;
     return;
   }
 
-  let totalSum = 0;
+  let totalGoodsPrice = 0;
 
-  cart.forEach(item => {
+  // Циклом проходим по всем тортам в корзине и генерируем для них HTML с кнопками и селектами
+  cart.forEach((item, index) => {
+    let itemPriceOnly = item.weight * item.pricePerKg;
+    
+    if (item.urgent) {
+      itemPriceOnly = itemPriceOnly * 1.2;
+    }
+
+    totalGoodsPrice += itemPriceOnly;
+
     const li = document.createElement('li');
     li.className = 'cart-item';
     li.innerHTML = `
-      <span class="cart-item-info">${item.name} × ${item.quantity}</span>
-      <div class="cart-item-controls">
-        <span class="cart-item-price">${(item.price * item.quantity).toLocaleString()} ₽</span>
-        <button class="cart-item-remove" data-id="${item.id}" title="Удалить">×</button>
+      <div class="cart-item-header">
+        <span class="cart-item-info">${item.name}</span>
+        <div class="cart-item-controls">
+          <span class="cart-item-price">${Math.round(itemPriceOnly).toLocaleString()} ₽</span>
+          <button class="cart-item-remove" data-index="${index}" title="Удалить из корзины">×</button>
+        </div>
+      </div>
+      
+      <div class="cart-item-options">
+        <!-- Кнопки плюс / минус веса -->
+        <div class="cart-weight-box">
+          <button type="button" class="cart-weight-btn minus-weight" data-index="${index}">−</button>
+          <div class="cart-weight-value">${item.weight} кг</div>
+          <button type="button" class="cart-weight-btn plus-weight" data-index="${index}">+</button>
+        </div>
+
+        <!-- Выбор начинки -->
+        <select class="cart-select-filling" data-index="${index}">
+          <option value="2000" ${item.fillingPrice === 2000 ? 'selected' : ''}>Крем чиз + клубника-банан</option>
+          <option value="2100" ${item.fillingPrice === 2100 ? 'selected' : ''}>Пломбир + малина-яблоко</option>
+          <option value="2200" ${item.fillingPrice === 2200 ? 'selected' : ''}>Шоколадный + вишня</option>
+          <option value="2300" ${item.fillingPrice === 2300 ? 'selected' : ''}>Белый шоколад + клубника</option>
+        </select>
+
+        <!-- Галочка срочности -->
+        <label class="cart-urgent-label">
+          <input type="checkbox" class="cart-urgent-checkbox" data-index="${index}" ${item.urgent ? 'checked' : ''}>
+          🔥 Срочно (+20%)
+        </label>
       </div>
     `;
     cartItemsList.appendChild(li);
-    totalSum += item.price * item.quantity;
   });
 
-  cartTotalSum.textContent = totalSum.toLocaleString();
+  cartTotalSum.textContent = Math.round(totalGoodsPrice).toLocaleString();
+
+  let delivery = 500;
+  if (totalGoodsPrice >= 8000) {
+    delivery = 0; 
+  }
+
+  const finalPrice = totalGoodsPrice + delivery;
+
+  if (resultText) {
+    resultText.textContent = `Стоимость сладостей: ${Math.round(totalGoodsPrice).toLocaleString()} руб. | Доставка: ${delivery === 0 ? 'Бесплатно' : delivery + ' руб.'}`;
+  }
+  if (grandTotalText) {
+    grandTotalText.innerHTML = `Итого к оплате за всё: <span style="font-size: 24px; font-weight: 700; color: #B5704B;">${Math.round(finalPrice).toFixed(0)} руб.</span>`;
+  }
 }
 
-function addToCart(id, name, price) {
-  const existingItem = cart.find(item => item.id === id);
+// ===== СВЕРХНАДЁЖНАЯ ФУНКЦИЯ ДОБАВЛЕНИЯ ТОВАРА С ВИТРИНЫ =====
+function addToCart(name, startPriceText, startWeightText) {
+  let cleanPrice = parseInt(startPriceText.replace(/[^0-9]/g, ''), 10);
+  if (isNaN(cleanPrice) || cleanPrice <= 0) {
+    cleanPrice = 3800; 
+  }
+
+  let cleanWeight = parseFloat(startWeightText.replace(',', '.').replace(/[^0-9.]/g, ''));
+  if (isNaN(cleanWeight) || cleanWeight <= 0) {
+    cleanWeight = 1.5; 
+  }
+
+  let pricePerKg = cleanPrice / cleanWeight;
+
+  const existingItem = cart.find(item => item.name === name);
 
   if (existingItem) {
-    existingItem.quantity += 1;
+    existingItem.weight += 1; 
   } else {
     cart.push({
-      id: id,
       name: name,
-      price: parseInt(price, 10),
-      quantity: 1
+      weight: cleanWeight,       
+      minWeight: cleanWeight,    
+      pricePerKg: pricePerKg,    
+      fillingPrice: 2000,
+      urgent: false
     });
   }
+  
   saveCart();
 }
 
-function removeFromCart(id) {
-  const existingItem = cart.find(item => item.id === id);
-
-  if (existingItem) {
-    if (existingItem.quantity > 1) {
-      existingItem.quantity -= 1;
-    } else {
-      cart = cart.filter(item => item.id !== id);
-    }
+// ===== СТРАХОВОЧНАЯ СТРОКА ДЛЯ КНОПОК ИЗ HTML =====
+// Если на ваших кнопках в HTML остался onclick="openOrderForm()", 
+// эта пустая функция-заглушка предотвратит появление ошибок в консоли
+window.openOrderForm = function() {
+  // Просто прокручиваем страницу вниз к форме оформления заказа
+  const orderSection = document.getElementById('order-form-section');
+  if (orderSection) {
+    orderSection.scrollIntoView({ behavior: 'smooth' });
   }
-  saveCart();
-}
+};
 
-// --- НАВЕШИВАНИЕ СОБЫТИЙ ДЛЯ КОРЗИНЫ ---
-
+// ===== ДЕЛЕГИРОВАНИЕ СОБЫТИЙ: СЛУШАЕМ КЛИКИ НА ВСЕМ САЙТЕ =====
 document.addEventListener('click', function(e) {
-  if (e.target && e.target.classList.contains('product-btn')) {
-    e.preventDefault(); 
-    
-    const btn = e.target;
-    const productCard = btn.closest('.product-card');
+  const target = e.target;
+
+  // 1. Событие: Клик по кнопке "Заказать" на витрине каталога
+  if (target && target.classList.contains('product-btn')) {
+    e.preventDefault();
+    const productCard = target.closest('.product-card');
     if (!productCard) return;
 
-    const id = btn.dataset.id || productCard.querySelector('.product-title').textContent.trim();
-    const name = btn.dataset.name || productCard.querySelector('.product-title').textContent.trim();
-    const priceText = productCard.querySelector('.product-price').textContent;
-    const price = btn.dataset.price || priceText.replace(/[^0-9]/g, '');
+    const titleElement = productCard.querySelector('.product-title');
+    const name = titleElement ? titleElement.textContent.trim() : "Торт с витрины";
 
-    addToCart(id, name, price);
-    
+    const priceElement = productCard.querySelector('.product-price');
+    const priceText = priceElement ? priceElement.textContent : "";
+
+    const weightElement = productCard.querySelector('.product-weight') || productCard.querySelector('[class*="weight"]');
+    const weightText = weightElement ? weightElement.textContent : "";
+
+    addToCart(name, priceText, weightText);
+
     const cartLink = document.querySelector('.header-cart-link');
     if (cartLink) {
       cartLink.classList.add('cart-bump');
       setTimeout(() => cartLink.classList.remove('cart-bump'), 400);
     }
 
-    btn.style.transform = 'scale(0.95)';
-    setTimeout(() => btn.style.transform = 'none', 100);
+    target.style.transform = 'scale(0.95)';
+    setTimeout(() => target.style.transform = 'none', 100);
+    return;
+  }
+
+  // 2. Событие: Клик по крестику удаления внутри корзины
+  if (target && target.classList.contains('cart-item-remove')) {
+    const index = target.dataset.index;
+    cart.splice(index, 1);
+    saveCart();
+    return;
+  }
+
+  // 3. Событие: Клик по кнопке ПЛЮС ВЕС (+) внутри корзины
+  if (target && target.classList.contains('plus-weight')) {
+    const index = target.dataset.index;
+    
+    if (cart[index].weight < 30) {
+      // Прибавляем 0.5 кг и округляем до 1 знака после запятой, чтобы не было багов JS
+      let newWeight = cart[index].weight + 0.5;
+      cart[index].weight = parseFloat(newWeight.toFixed(1));
+      saveCart();
+    }
+    return;
+  }
+
+  // 4. Событие: Клик по кнопке МИНУС ВЕС (−) внутри корзины
+  if (target && target.classList.contains('minus-weight')) {
+    const index = target.dataset.index;
+    const currentItem = cart[index];
+
+    if (currentItem.weight > currentItem.minWeight) {
+      // Вычитаем 0.5 кг и округляем до 1 знака после запятой
+      let newWeight = currentItem.weight - 0.5;
+      currentItem.weight = parseFloat(newWeight.toFixed(1));
+      saveCart();
+    }
+    return;
+  }
+
+});
+
+// ===== ОБРАБОТКА ИЗМЕНЕНИЙ ВНУТРИ КОРЗИНЫ (ВЫБОР НАЧИНКИ И СРОЧНОСТИ) =====
+document.addEventListener('change', function(e) {
+  const target = e.target;
+
+  if (target && target.classList.contains('cart-select-filling')) {
+    const index = target.dataset.index;
+    cart[index].fillingPrice = parseInt(target.value, 10);
+    saveCart();
+    return;
+  }
+
+  if (target && target.classList.contains('cart-urgent-checkbox')) {
+    const index = target.dataset.index;
+    cart[index].urgent = target.checked;
+    saveCart();
+    return;
   }
 });
 
-if (cartItemsList) {
-  cartItemsList.addEventListener('click', function(e) {
-    if (e.target && e.target.classList.contains('cart-item-remove')) {
-      const id = e.target.dataset.id;
-      removeFromCart(id);
-    }
-  });
-}
-
-// При загрузке страницы запускаем отрисовку корзины и базовый расчет
-window.addEventListener('DOMContentLoaded', function() {
-  renderCart();
-  handleCalculation();
-});
+// Первичная прорисовка корзины при загрузке страницы
+window.addEventListener('DOMContentLoaded', renderCart);
