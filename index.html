@@ -294,8 +294,21 @@
 </select>
 
           <!-- 🌟 СЮДА ДОБАВЛЯЕМ НАШЕ НОВОЕ ПОЛЕ ДЛЯ ВЕСА -->
-    <label for="weightInput">Желаемый вес торта (кг):</label>
-    <input type="number" id="weightInput" value="2.5" step="0.5" min="1">
+  <div class="form-group">
+  <label>Желаемый вес торта (кг):</label>
+  
+  <!-- НОВЫЙ БЛОК КНОПОК ИНКРЕМЕНТА -->
+  <div class="weight-increment-container">
+    <button type="button" class="weight-btn minus" id="weightMinusBtn">−</button>
+    <div class="weight-value-wrapper">
+      <!-- Изначально стоит 0 (индивидуальный торт не выбран). Поле заблокировано от клавиатуры (readonly) -->
+      <input type="text" id="weightInput" value="0" readonly>
+      <span class="weight-unit">кг</span>
+    </div>
+    <button type="button" class="weight-btn plus" id="weightPlusBtn">+</button>
+  </div>
+</div>
+
 
     <!-- 🌟 ДОБАВЛЯЕМ ID НАШЕЙ КНОПКЕ (чтобы JS её нашёл) -->
     <button type="button" id="calculateBtn">Узнать стоимость</button>
