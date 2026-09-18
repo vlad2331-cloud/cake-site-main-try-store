@@ -843,5 +843,90 @@ padding: 10px 0;
   color: #7A6555;
   pointer-events: none;      /* Чтобы клик мыши проходил сквозь буквы в поле */
 }
+/* ===== ОБНОВЛЕННЫЕ СТИЛИ КОРЗИНЫ С УПРАВЛЕНИЕМ ВЕСОМ ===== */
+.cart-item {
+  display: flex;
+  flex-direction: column; /* Элементы внутри карточки корзины встанут друг под друга */
+  gap: 12px;
+  padding: 15px 0;
+  border-bottom: 1px dashed #DDD0BF;
+}
+
+.cart-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: #2C1A0E;
+}
+
+.cart-item-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  background: #FAF7F2; /* Нежный кремовый фон под настройки */
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Компактные кнопки плюс/минус веса внутри корзины */
+.cart-weight-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #DDD0BF;
+  border-radius: 6px;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+.cart-weight-btn {
+  width: 32px;
+  height: 32px;
+  background: #B5704B; /* Наш карамельный цвет */
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-weight-btn:hover { 
+  background: #C98B5C; 
+}
+
+.cart-weight-value {
+  width: 45px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2C1A0E;
+}
+
+/* Красивый компактный выбор начинки в корзине */
+.cart-select-filling {
+  padding: 6px 10px;
+  font-size: 13px;
+  border: 1px solid #DDD0BF;
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: #2C1A0E;
+  font-family: inherit;
+}
+
+/* Галочка срочности для каждого торта */
+.cart-urgent-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #7A6555;
+  cursor: pointer;
+  user-select: none;
+}
 
 }
