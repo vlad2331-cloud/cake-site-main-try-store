@@ -1404,5 +1404,120 @@ padding: 10px 0;
     visibility: visible;
     transform: translate(-50%, 0);
   }
+  }
+/* ===== СЛАЙДЕР БАННЕРОВ ===== */
+.banner-slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;           /* ← ОБЯЗАТЕЛЬНО, иначе слайды видны друг под другом */
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(44, 26, 14, 0.08);
+  margin-bottom: 40px;
+  background: #FFFFFF;
+}
 
+.banner-slider__track {
+  display: flex;              /* ← ОБЯЗАТЕЛЬНО, иначе слайды встанут вертикально */
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+.banner-slide {
+  flex: 0 0 100%;             /* каждая карточка — ровно 100% ширины */
+  min-width: 100%;            /* фиксирует ширину, не даёт сжиматься */
+  display: block;
+  overflow: hidden;
+}
+
+.banner-slide img {
+  width: 100%;
+  height: 400px;              /* ← ВЫСОТА баннера, можно менять */
+  object-fit: cover;          /* обрезает по краям, не растягивая */
+  object-position: center;
+  display: block;
+}
+
+/* Стрелки */
+.banner-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.92);
+  border: none;
+  border-radius: 50%;
+  color: #B5704B;
+  font-size: 26px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 4px 0;
+  box-shadow: 0 4px 12px rgba(44, 26, 14, 0.15);
+  transition: background 0.2s, color 0.2s;
+  z-index: 2;
+}
+
+.banner-arrow:hover {
+  background: #B5704B;
+  color: #FFFFFF;
+}
+
+.banner-arrow--prev { left: 14px; }
+.banner-arrow--next { right: 14px; }
+
+/* Точки */
+.banner-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.banner-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  padding: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s, transform 0.2s;
+}
+
+.banner-dot--active {
+  background: #B5704B;
+  transform: scale(1.25);
+}
+
+/* Планшеты */
+@media (max-width: 992px) {
+  .banner-slide img { height: 340px; }
+}
+
+/* Телефоны */
+@media (max-width: 768px) {
+  .banner-slider {
+    border-radius: 12px;
+    margin-bottom: 25px;
+  }
+  .banner-slide img { height: 280px; }
+  .banner-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+  .banner-arrow--prev { left: 8px; }
+  .banner-arrow--next { right: 8px; }
+  .banner-dots { bottom: 10px; gap: 6px; }
+  .banner-dot { width: 8px; height: 8px; }
+}
+@media (max-width: 480px) {
+  .banner-slide img { height: 240px; }
 }
