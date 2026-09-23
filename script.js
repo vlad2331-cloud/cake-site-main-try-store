@@ -267,3 +267,62 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+// ===== СЛАЙДЕР БАННЕРОВ =====
+document.addEventListener('DOMContentLoaded', function () {
+  const slider = document.getElementById('bannerSlider');
+  if (!slider) return;
+
+  const track = slider.querySelector('.banner-slider__track');
+  const slides = slider.querySelectorAll('.banner-slide');
+  const prevBtn = slider.querySelector('.banner-arrow--prev');
+  const nextBtn = slider.querySelector('.banner-arrow--next');
+  const dotsContainer = slider.querySelector('.banner-dots');
+
+  let currentIndex = 0;
+  const total = slides.length;
+  let timer = null;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'banner-dot' + (i === 0 ? ' banner-dot--active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = dotsContainer.querySelectorAll('.banner-dot');
+
+  function update() {
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('banner-dot--active', i === currentIndex));
+  }
+
+  function goTo(i) {
+    currentIndex = (i + total) % total;
+    update();
+    restart();
+  }
+
+  function next() { goTo(currentIndex + 1); }
+  function prev() { goTo(currentIndex - 1); }
+
+  function restart() {
+    if (timer) clearInterval(timer);
+    timer = setInterval(next, 5000);
+  }
+
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+  slider.addEventListener('mouseenter', () => timer && clearInterval(timer));
+  slider.addEventListener('mouseleave', restart);
+
+  // Свайпы
+  let touchStartX = 0;
+  slider.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX, { passive: true });
+  slider.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
+  }, { passive: true });
+
+  update();
+  restart();
+});
