@@ -1,39 +1,3 @@
-// ===== ФИЛЬТР КАТАЛОГА (по клику на ссылки в сайдбаре) =====
-document.addEventListener('DOMContentLoaded', function() {
-  const categoryLinks = document.querySelectorAll('.category-link');
-  
-  function filterProducts(category) {
-    const gridItems = document.querySelectorAll('.products-grid > .product-link');
-    gridItems.forEach(item => {
-      const productCard = item.querySelector('.product-card');
-      if (!productCard) return;
-      const productCategory = productCard.dataset.category;
-
-      if (category === 'all' || productCategory === category) {
-        item.classList.remove('product-hidden'); 
-      } else {
-        item.classList.add('product-hidden'); 
-      }
-    });
-  }
-
-  categoryLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      categoryLinks.forEach(l => l.classList.remove('active'));
-      this.classList.add('active');
-      const category = this.dataset.category;
-      filterProducts(category);
-    });
-  });
-
-  const allLink = document.querySelector('.category-link[data-category="all"]');
-  if (allLink) {
-    allLink.classList.add('active');
-    filterProducts('all');
-  }
-});
-
 // ===== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ КОРЗИНЫ =====
 let cart = JSON.parse(localStorage.getItem('sharkova_cake_cart')) || [];
 const cartItemsList = document.getElementById('cartItemsList');
@@ -288,3 +252,18 @@ document.addEventListener('change', function(e) {
 
 // Первичная прорисовка корзины при загрузке страницы
 window.addEventListener('DOMContentLoaded', renderCart);
+
+// ===== ВЫПАДАЮЩЕЕ МЕНЮ НА МОБИЛЬНЫХ =====
+document.addEventListener('DOMContentLoaded', function () {
+  const dropdownToggles = document.querySelectorAll('.nav-dropdown-toggle');
+
+  dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', function (e) {
+      if (window.innerWidth <= 600) {
+        e.preventDefault();
+        const parent = this.closest('.nav-dropdown');
+        if (parent) parent.classList.toggle('open');
+      }
+    });
+  });
+});
