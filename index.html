@@ -24,7 +24,13 @@
     <a href="index.html" class="logo">🎂 Торты на Заказ г.Астрахань</a>
 
     <!-- Телефон и корзина -->
+       <!-- Телефон и корзина -->
     <div class="header-actions">
+      <!-- 🔍 Кнопка-лупа — вставляем ПЕРВОЙ в header-actions -->
+      <button type="button" class="header-search-btn" id="headerSearchBtn" aria-label="Поиск">
+        🔍
+      </button>
+
       <a href="tel:+79881776458" class="phone">📞 +7 (988) 177-64-58</a>
 
       <a href="#cartContainer" class="header-cart-link">
@@ -33,6 +39,20 @@
       </a>
     </div>
 
+  </div>
+
+  <!-- 🔍 Поле поиска — вставляем ПОСЛЕ закрытия .header-top, но ПЕРЕД меню -->
+  <div class="header-search-bar" id="headerSearchBar" style="display:none;">
+    <form action="catalog.html" method="GET" class="header-search-form">
+      <input
+        type="text"
+        name="q"
+        id="headerSearchInput"
+        placeholder="Найти торт по названию..."
+        autocomplete="off"
+      >
+      <button type="submit">Найти</button>
+    </form>
   </div>
 
   <!-- Меню растянуто по всей ширине -->
@@ -178,8 +198,8 @@
       <div class="product-info">
         <h3 class="product-title">Бенто торт «Для двоих»</h3>
         <div class="product-info-meta">
-          <p class="product-weight">700 г</p>
-          <div class="product-price">2 100 ₽</div>
+          <p class="product-weight">от 450 г</p>
+          <div class="product-price">от 1800 ₽</div>
         </div>
         <button class="product-btn" onclick="event.preventDefault(); openOrderForm('Бенто торт Для двоих')">Заказать</button>
       </div>
@@ -207,7 +227,7 @@
 
    <!-- Товар 6: Торт для мужчины «За ВДВ» -->
   <a href="products/man_vdv.html" class="product-link" style="text-decoration:none; display:block;">
-    <div class="product-card" data-category="bento">
+    <div class="product-card" data-category="birthday">
       <div class="product-image">
         <img src="images/catalog/vdv.png" alt="Торт мужчине ВДВ" loading="lazy">
         <span class="product-badge">Популярный</span>

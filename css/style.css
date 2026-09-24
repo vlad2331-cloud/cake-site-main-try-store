@@ -1521,3 +1521,105 @@ padding: 10px 0;
 @media (max-width: 480px) {
   .banner-slide img { height: 240px; }
 }
+
+/* ===== ЛИПКАЯ ШАПКА ===== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(44, 26, 14, 0.06);
+}
+
+/* ===== ПОИСК В ШАПКЕ ===== */
+.header-search-btn {
+  background: #FAF7F2;
+  border: 1px solid #DDD0BF;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.header-search-btn:hover {
+  background: #FFFFFF;
+  border-color: #B5704B;
+  transform: translateY(-1px);
+}
+
+/* Выпадающая полоса поиска под шапкой */
+.header-search-bar {
+  padding: 12px 24px;
+  background: #FFFFFF;
+  border-top: 1px solid #F0E6D8;
+  animation: searchSlideDown 0.2s ease;
+}
+
+@keyframes searchSlideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.header-search-form {
+  display: flex;
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header-search-form input {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #2C1A0E;
+  background: #FAF7F2;
+  border: 1px solid #DDD0BF;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.header-search-form input:focus {
+  border-color: #B5704B;
+  background: #FFFFFF;
+}
+
+.header-search-form button {
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #FFF;
+  background: #B5704B;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.header-search-form button:hover {
+  background: #C98B5C;
+}
+
+/* На мобильных — компактнее */
+@media (max-width: 600px) {
+  .header-search-btn {
+    padding: 6px 10px;
+    font-size: 16px;
+  }
+
+  .header-search-bar {
+    padding: 10px 15px;
+  }
+
+  .header-search-form {
+    flex-direction: column;
+  }
+
+  .header-search-form button {
+    width: 100%;
+  }
+}

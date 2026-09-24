@@ -5,19 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Свадебный торт «Нежность» | Торты на заказ SharKOва cake</title>
     <meta name="description" content="Свадебный торт «Нежность» – элегантный двухъярусный торт с живыми цветами, начинка Крем чиз с клубнично-банановым конфи. Закажите в Астрахани!">
-    
-    <!-- Подключаем шрифты и общие стили -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
-    
-    <!-- Дополнительные стили только для страницы товара -->
+
     <style>
-        /* Стили страницы товара (дополнительные к общим) */
-        .product-page {
-            padding: 40px 0 60px;
-        }
+        .product-page { padding: 40px 0 60px; }
 
         .product-container {
             display: flex;
@@ -28,10 +23,7 @@
             align-items: flex-start;
         }
 
-        /* Левая колонка – галерея */
-        .product-gallery {
-            flex: 1 1 50%;
-        }
+        .product-gallery { flex: 1 1 50%; }
 
         .product-main-image {
             width: 100%;
@@ -57,14 +49,9 @@
             transition: border 0.2s;
         }
 
-        .product-thumbnails img:hover {
-            border-color: #B5704B;
-        }
+        .product-thumbnails img:hover { border-color: #B5704B; }
 
-        /* Правая колонка – детали */
-        .product-details {
-            flex: 1 1 50%;
-        }
+        .product-details { flex: 1 1 50%; }
 
         .product-details h1 {
             font-family: 'Playfair Display', serif;
@@ -94,18 +81,10 @@
             margin-bottom: 25px;
         }
 
-        .product-params p {
-            margin: 6px 0;
-            font-size: 15px;
-        }
+        .product-params p { margin: 6px 0; font-size: 15px; }
+        .product-params strong { color: #B5704B; }
 
-        .product-params strong {
-            color: #B5704B;
-        }
-
-        .product-price-block {
-            margin-bottom: 25px;
-        }
+        .product-price-block { margin-bottom: 25px; }
 
         .product-price-block .price {
             font-size: 28px;
@@ -120,7 +99,6 @@
             margin-top: 4px;
         }
 
-        /* Кнопка заказа */
         .product-order-btn {
             display: inline-block;
             background: #B5704B;
@@ -140,45 +118,56 @@
             transform: translateY(-2px);
         }
 
-        /* Адаптив для мобильных */
         @media (max-width: 768px) {
-            .product-container {
-                flex-direction: column;
-                gap: 30px;
-            }
-
-            .product-details h1 {
-                font-size: 26px;
-            }
-
-            .product-price-block .price {
-                font-size: 24px;
-            }
-
-            .product-thumbnails img {
-                width: 60px;
-                height: 60px;
-            }
+            .product-container { flex-direction: column; gap: 30px; }
+            .product-details h1 { font-size: 26px; }
+            .product-price-block .price { font-size: 24px; }
+            .product-thumbnails img { width: 60px; height: 60px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== ШАПКА (копируем с index.html) ===== -->
+    <!-- ===== ШАПКА ===== -->
     <header class="site-header">
-        <div class="logo">🎂 Торты на Заказ г.Астрахань</div>
+        <div class="header-top">
+            <a href="../index.html" class="logo">🎂 Торты на Заказ</a>
+
+            <div class="header-actions">
+                <a href="tel:+79881776458" class="phone">📞 +7 (988) 177-64-58</a>
+                <a href="#cartContainer" class="header-cart-link">
+                    <span class="cart-icon">🛒</span>
+                    <span id="cartBadge" class="cart-badge">0</span>
+                </a>
+            </div>
+        </div>
+
         <nav class="site-nav">
-            <a href="../index.html#catalog">Наши торты</a>
-            <a href="../index.html#order-form-section">Рассчитать стоимость</a>
+            <a href="../index.html" class="nav-link">Главная</a>
+            <a href="../catalog.html" class="nav-link">Каталог</a>
+            <a href="../toppings.html" class="nav-link">Начинки</a>
+            <a href="../stocks.html" class="nav-link">Акции</a>
+            <a href="../about.html" class="nav-link">О компании</a>
+
+            <div class="nav-dropdown">
+                <a href="javascript:void(0)" class="nav-link nav-dropdown-toggle">
+                    Покупателям <span class="nav-arrow">▾</span>
+                </a>
+                <div class="nav-dropdown-menu">
+                    <a href="../reviews.html">Отзывы</a>
+                    <a href="../delivery.html">Доставка и оплата</a>
+                </div>
+            </div>
+
+            <a href="../jobs.html" class="nav-link">Вакансии</a>
+            <a href="../contacts.html" class="nav-link">Контакты</a>
         </nav>
-        <div class="phone">📞 +7 (988) 177-64-58</div>
     </header>
 
     <!-- ===== СТРАНИЦА ТОВАРА ===== -->
     <main class="product-page">
         <div class="product-container">
 
-            <!-- Левая часть: галерея -->
             <div class="product-gallery">
                 <img src="../images/catalog/wedding1.jpg" alt="Свадебный торт Нежность" class="product-main-image" id="mainImage">
                 <div class="product-thumbnails">
@@ -189,7 +178,6 @@
                 <p style="font-size:13px; color:#7A6555; margin-top:8px;">* Нажмите на миниатюру, чтобы увеличить фото</p>
             </div>
 
-            <!-- Правая часть: детали -->
             <div class="product-details">
                 <h1>Свадебный торт «Нежность»</h1>
                 <p class="product-subtitle">Элегантный двухъярусный торт с топерами сверху</p>
@@ -210,14 +198,38 @@
                     <span class="price-note">* Точная стоимость зависит от веса и сложности декора</span>
                 </div>
 
-                <!-- Кнопка заказа – скроллит к форме на главной -->
-                <a href="../index.html#order-form-section" class="product-order-btn" onclick="setCakeName('Свадебный торт «Нежность»')">Заказать этот торт</a>
+                <!-- Кнопка добавляет в корзину и прокручивает к ней -->
+                <button class="product-order-btn"
+                        onclick="addToCartFromProduct('Свадебный торт «Нежность»', 7500, 4)">
+                    Заказать этот торт
+                </button>
             </div>
 
         </div>
     </main>
 
-    <!-- ===== ПОДВАЛ (копируем с index.html) ===== -->
+    <!-- ===== КОРЗИНА НА СТРАНИЦЕ ТОВАРА ===== -->
+    <section class="order-section" id="cartContainer" style="margin-top: 50px;">
+        <h2>🛒 Ваша корзина</h2>
+
+        <div class="cart-container">
+            <h3>🛒 Ваша корзина</h3>
+            <ul id="cartItemsList" class="cart-items-list">
+                <li class="empty-cart-message">Вы пока не выбрали готовые торты</li>
+            </ul>
+            <div class="cart-total">
+                <strong>Стоимость товаров: <span id="cartTotalSum">0</span> ₽</strong>
+            </div>
+        </div>
+
+        <a href="../index.html#order-form-section"
+           class="submit-btn"
+           style="display:inline-block; max-width:320px; margin-top:20px; text-decoration:none; text-align:center;">
+            Перейти к оформлению →
+        </a>
+    </section>
+
+    <!-- ===== ПОДВАЛ ===== -->
     <footer class="site-footer">
         <p class="footer-text">© 2026 Торты на заказ. С любовью к каждому клиенту.</p>
         <div class="footer-contacts">
@@ -244,14 +256,6 @@
         function changeImage(src) {
             document.getElementById('mainImage').src = src;
         }
-
-        // Функция для передачи названия торта в форму на главной
-        function setCakeName(name) {
-            // Сохраняем в localStorage, чтобы на главной странице подхватить
-            localStorage.setItem('selectedCake', name);
-        }
-
-        // Если на главной есть скрипт, который читает localStorage – он подставит название
     </script>
 
 </body>
