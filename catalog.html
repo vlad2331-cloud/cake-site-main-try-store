@@ -4,25 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог тортов — SharKOва cake</title>
+    <meta name="description" content="Каталог тортов на заказ в Астрахани: свадебные, детские, бенто, на день рождения. Закажите с доставкой.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- Шапка сайта -->
+<!-- ===== ШАПКА ===== -->
 <header class="site-header">
   <div class="header-top">
 
     <a href="index.html" class="logo">🎂 Торты на Заказ</a>
 
     <div class="header-actions">
+      <button type="button" class="header-search-btn" id="headerSearchBtn" aria-label="Поиск">
+        🔍
+      </button>
+
       <a href="tel:+79881776458" class="phone">📞 +7 (988) 177-64-58</a>
 
-      <a href="index.html#cartContainer" class="header-cart-link">
+      <a href="#cartContainer" class="header-cart-link">
         <span class="cart-icon">🛒</span>
         <span id="cartBadge" class="cart-badge">0</span>
       </a>
@@ -30,6 +35,21 @@
 
   </div>
 
+  <!-- ⬇️ ЭТОТ БЛОК ДОЛЖЕН БЫТЬ ЗДЕСЬ — БЕЗ НЕГО ПОИСК НЕ РАБОТАЕТ -->
+  <div class="header-search-bar" id="headerSearchBar" style="display:none;">
+    <form action="catalog.html" method="GET" class="header-search-form">
+      <input
+        type="text"
+        name="q"
+        id="headerSearchInput"
+        placeholder="Найти торт по названию..."
+        autocomplete="off"
+      >
+      <button type="submit">Найти</button>
+    </form>
+  </div>
+
+  <!-- Меню -->
   <nav class="site-nav">
     <a href="index.html" class="nav-link">Главная</a>
     <a href="catalog.html" class="nav-link nav-link-active">Каталог</a>
@@ -52,17 +72,16 @@
   </nav>
 </header>
 
-<!-- ===== ЗАГОЛОВОК СТРАНИЦЫ ===== -->
+<!-- ===== ЗАГОЛОВОК ===== -->
 <section class="page-hero">
   <h1>Наши торты</h1>
-  <p>Выберите категорию слева, чтобы увидеть подходящие торты. Или добавьте понравившийся торт сразу в корзину.</p>
+  <p>Выберите категорию или добавьте понравившийся торт сразу в корзину</p>
 </section>
 
-<!-- ===== КАТАЛОГ С САЙДБАРОМ ===== -->
+<!-- ===== КАТАЛОГ ===== -->
 <section class="catalog-section" id="catalog">
   <div class="catalog-layout">
 
-    <!-- ЛЕВАЯ КОЛОНКА: КАТЕГОРИИ -->
     <aside class="catalog-sidebar">
       <h3 class="sidebar-title">Категории</h3>
       <ul class="category-list">
@@ -78,11 +97,9 @@
       </div>
     </aside>
 
-    <!-- ПРАВАЯ КОЛОНКА: СЕТКА ТОВАРОВ -->
     <div class="catalog-products">
       <div class="products-grid">
 
-        <!-- Товар 1: Свадебный торт «Нежность» -->
         <a href="products/wedding1.html" class="product-link" style="text-decoration:none; display:block;">
           <div class="product-card" data-category="wedding">
             <div class="product-image">
@@ -100,7 +117,6 @@
           </div>
         </a>
 
-        <!-- Товар 2: Детский торт «Соник» -->
         <a href="products/kids_sonic.html" class="product-link" style="text-decoration:none; display:block;">
           <div class="product-card" data-category="kids">
             <div class="product-image">
@@ -118,7 +134,6 @@
           </div>
         </a>
 
-        <!-- Товар 3: Праздничный торт «Ягодный» -->
         <a href="products/birthday_berry.html" class="product-link" style="text-decoration:none; display:block;">
           <div class="product-card" data-category="birthday">
             <div class="product-image">
@@ -136,7 +151,6 @@
           </div>
         </a>
 
-        <!-- Товар 4: Бенто торт «Для двоих» -->
         <a href="products/bento_two.html" class="product-link" style="text-decoration:none; display:block;">
           <div class="product-card" data-category="bento">
             <div class="product-image">
@@ -145,15 +159,14 @@
             <div class="product-info">
               <h3 class="product-title">Бенто торт «Для двоих»</h3>
               <div class="product-info-meta">
-                <p class="product-weight">700 г</p>
-                <div class="product-price">2 100 ₽</div>
+                <p class="product-weight">от 450 г</p>
+                <div class="product-price">от 1 800 ₽</div>
               </div>
               <button class="product-btn" onclick="event.preventDefault();">Заказать</button>
             </div>
           </div>
         </a>
 
-        <!-- Товар 5: Детский торт «Майнкрафт» -->
         <a href="products/kids_minekraft.html" class="product-link" style="text-decoration:none; display:block;">
           <div class="product-card" data-category="kids">
             <div class="product-image">
@@ -171,7 +184,6 @@
           </div>
         </a>
 
-        <!-- Товар 6: Торт для мужчины «За ВДВ» -->
         <a href="products/man_vdv.html" class="product-link" style="text-decoration:none; display:block;">
           <div class="product-card" data-category="birthday">
             <div class="product-image">
@@ -189,66 +201,141 @@
           </div>
         </a>
 
-        <!-- ➕ Сюда можете добавлять новые товары по такому же шаблону -->
-
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- ===== ФУТЕР ===== -->
+<!-- ===== КОРЗИНА ===== -->
+<section class="order-section" id="cartContainer" style="margin-top: 50px;">
+  <h2>🛒 Ваша корзина</h2>
+
+  <div class="cart-container">
+    <h3>🛒 Ваша корзина</h3>
+    <ul id="cartItemsList" class="cart-items-list">
+      <li class="empty-cart-message">Вы пока не выбрали готовые торты</li>
+    </ul>
+    <div class="cart-total">
+      <strong>Стоимость товаров: <span id="cartTotalSum">0</span> ₽</strong>
+    </div>
+  </div>
+
+  <a href="index.html#order-form-section"
+     class="submit-btn"
+     style="display:inline-block; max-width:320px; margin-top:20px; text-decoration:none; text-align:center;">
+    Перейти к оформлению →
+  </a>
+</section>
+
+<!-- ===== ПОДВАЛ ===== -->
 <footer class="site-footer">
   <p class="footer-text">© 2026 Торты на заказ. С любовью к каждому клиенту.</p>
 
   <div class="footer-contacts">
-    <a href="https://wa.me/79170816525?text=Привет%21%20Хочу%20заказать%20торт"
-       class="contact-link whatsapp"
-       target="_blank"
-       rel="noopener noreferrer">
-      <img src="images/logo/WhatsApp_logo-color-vertical.svg.webp" alt="WhatsApp" width="24" height="24" style="vertical-align: middle; margin-right: 8px;">
+    <a href="https://wa.me/79170816525?text=Привет%21%20Хочу%20заказать%20торт" class="contact-link whatsapp" target="_blank" rel="noopener noreferrer">
+      <img src="images/logo/WhatsApp_logo-color-vertical.svg.webp" alt="WhatsApp" width="24" height="24" style="vertical-align:middle; margin-right:8px;">
       Написать в WhatsApp
     </a>
-    <a href="https://t.me/ваш_username"
-       class="contact-link telegram"
-       target="_blank"
-       rel="noopener noreferrer">
-      <img src="images/logo/Telegram_2019_Logo.svg.webp" alt="Telegram" width="24" height="24" style="vertical-align: middle; margin-right: 8px;">
+    <a href="https://t.me/ваш_username" class="contact-link telegram" target="_blank" rel="noopener noreferrer">
+      <img src="images/logo/Telegram_2019_Logo.svg.webp" alt="Telegram" width="24" height="24" style="vertical-align:middle; margin-right:8px;">
       Написать в Telegram
     </a>
     <a href="https://max.ru/u/f9LHodD0cOLYQq51SfQPaaQOz8GkIMK5_IvAtXiSyLAyNAZmZk75qnrLQA4" class="contact-link max" target="_blank" rel="noopener noreferrer">
-      <img src="images/logo/Логотип_MAX.svg.webp" alt="MAX" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 6px;">
+      <img src="images/logo/Логотип_MAX.svg.webp" alt="MAX" width="24" height="24" style="vertical-align:middle; margin-right:6px;">
       Написать в MAX
     </a>
   </div>
 </footer>
 
-<!-- ===== СКРИПТЫ ===== -->
+<!-- ===== ОСНОВНОЙ СКРИПТ ===== -->
 <script src="script.js"></script>
 
-<!-- ===== ФИЛЬТР ПО URL ===== -->
+<!-- ===== ПОИСК В ШАПКЕ ===== -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  const params = new URLSearchParams(window.location.search);
-  const category = params.get('cat') || 'all';
+  const searchBtn = document.getElementById('headerSearchBtn');
+  const searchBar = document.getElementById('headerSearchBar');
+  const searchInput = document.getElementById('headerSearchInput');
 
-  // Скрываем товары, которые не подходят под выбранную категорию
-  document.querySelectorAll('.products-grid > .product-link').forEach(item => {
-    const card = item.querySelector('.product-card');
-    if (!card) return;
-    if (category === 'all' || card.dataset.category === category) {
-      item.classList.remove('product-hidden');
+  if (!searchBtn || !searchBar) {
+    console.warn('Поиск: не найден headerSearchBtn или headerSearchBar');
+    return;
+  }
+
+  searchBtn.addEventListener('click', function () {
+    const isHidden = searchBar.style.display === 'none' || !searchBar.style.display;
+    if (isHidden) {
+      searchBar.style.display = 'block';
+      if (searchInput) setTimeout(() => searchInput.focus(), 50);
     } else {
-      item.classList.add('product-hidden');
+      searchBar.style.display = 'none';
     }
   });
 
-  // Подсвечиваем активную категорию в сайдбаре
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && searchBar.style.display === 'block') {
+      searchBar.style.display = 'none';
+    }
+  });
+});
+</script>
+
+<!-- ===== ФИЛЬТР ПО КАТЕГОРИИ И ПОИСКУ ===== -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const params = new URLSearchParams(window.location.search);
+  let currentCategory = params.get('cat') || 'all';
+  const query = (params.get('q') || '').trim().toLowerCase();
+
+  const cards = document.querySelectorAll('.products-grid > .product-link');
+
+  function applyFilters() {
+    let visibleCount = 0;
+
+    cards.forEach(item => {
+      const card = item.querySelector('.product-card');
+      if (!card) return;
+
+      const cardCategory = card.dataset.category || '';
+      const title = (card.querySelector('.product-title')?.textContent || '').toLowerCase();
+      const desc = (card.querySelector('.product-description')?.textContent || '').toLowerCase();
+
+      const categoryMatch = (currentCategory === 'all' || cardCategory === currentCategory);
+      const searchMatch = (!query || title.includes(query) || desc.includes(query));
+
+      if (categoryMatch && searchMatch) {
+        item.classList.remove('product-hidden');
+        visibleCount++;
+      } else {
+        item.classList.add('product-hidden');
+      }
+    });
+
+    const grid = document.querySelector('.products-grid');
+    let noResultMsg = document.getElementById('noResultsMessage');
+
+    if (visibleCount === 0 && grid) {
+      if (!noResultMsg) {
+        noResultMsg = document.createElement('p');
+        noResultMsg.id = 'noResultsMessage';
+        noResultMsg.style.cssText = 'text-align:center; color:#7A6555; font-size:16px; padding:40px 20px; grid-column: 1 / -1;';
+        grid.appendChild(noResultMsg);
+      }
+      noResultMsg.textContent = query
+        ? `По запросу «${query}» ничего не найдено. Попробуйте другое слово.`
+        : 'В этой категории пока нет тортов.';
+    } else if (noResultMsg) {
+      noResultMsg.remove();
+    }
+  }
+
+  // Подсветка активной категории
   document.querySelectorAll('.category-link').forEach(link => {
-    link.classList.toggle('active', link.dataset.category === category);
+    link.classList.toggle('active', link.dataset.category === currentCategory);
   });
 
-  // Обработка клика по категории в сайдбаре — меняем URL без перезагрузки
+  // Клик по категории
   document.querySelectorAll('.category-link').forEach(link => {
     link.addEventListener('click', function (e) {
       e.preventDefault();
@@ -262,21 +349,15 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       window.history.pushState({}, '', url);
 
-      // Заново перерисовываем сетку
-      document.querySelectorAll('.products-grid > .product-link').forEach(item => {
-        const card = item.querySelector('.product-card');
-        if (!card) return;
-        if (cat === 'all' || card.dataset.category === cat) {
-          item.classList.remove('product-hidden');
-        } else {
-          item.classList.add('product-hidden');
-        }
-      });
-
       document.querySelectorAll('.category-link').forEach(l => l.classList.remove('active'));
       this.classList.add('active');
+
+      currentCategory = cat;
+      applyFilters();
     });
   });
+
+  applyFilters();
 });
 </script>
 
