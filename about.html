@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>О компании — SharKOва cake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <a href="index.html" class="logo">🎂 Торты на Заказ</a>
+    <div class="header-actions">
+      <button type="button" class="header-search-btn" id="headerSearchBtn">🔍</button>
+      <a href="tel:+79881776458" class="phone">📞 +7 (988) 177-64-58</a>
+      <a href="index.html#cartContainer" class="header-cart-link">
+        <span class="cart-icon">🛒</span>
+        <span id="cartBadge" class="cart-badge">0</span>
+      </a>
+    </div>
+  </div>
+  <div class="header-search-bar" id="headerSearchBar" style="display:none;">
+    <form action="catalog.html" method="GET" class="header-search-form">
+      <input type="text" name="q" id="headerSearchInput" placeholder="Найти торт по названию..." autocomplete="off">
+      <button type="submit">Найти</button>
+    </form>
+  </div>
+  <nav class="site-nav">
+    <a href="index.html" class="nav-link">Главная</a>
+    <a href="catalog.html" class="nav-link">Каталог</a>
+    <a href="toppings.html" class="nav-link">Начинки</a>
+    <a href="stocks.html" class="nav-link">Акции</a>
+    <a href="about.html" class="nav-link nav-link-active">О компании</a>
+    <div class="nav-dropdown">
+      <a href="javascript:void(0)" class="nav-link nav-dropdown-toggle">Покупателям <span class="nav-arrow">▾</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="reviews.html">Отзывы</a>
+        <a href="delivery.html">Доставка и оплата</a>
+      </div>
+    </div>
+    <a href="jobs.html" class="nav-link">Вакансии</a>
+    <a href="contacts.html" class="nav-link">Контакты</a>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <h1>О компании SharKOва cake</h1>
+  <p>Кондитерская студия в Астрахани, работаем с 2022 года</p>
+</section>
+
+<section class="order-section" style="max-width:800px; margin:0 auto 40px; text-align:left;">
+  <h2 style="margin-top:0;">Наша история</h2>
+  <p>Мы — небольшая семейная кондитерская в Астрахани. Начинали с домашних заказов для друзей и знакомых, а за 4 года выросли в студию, которая сделала более 2000 тортов по всему городу.</p>
+
+  <h2>Что нас отличает</h2>
+  <ul style="font-size:16px; line-height:1.8; color:#2C1A0E;">
+    <li>Только натуральные ингредиенты — сливочное масло, фермерские сливки, бельгийский шоколад</li>
+    <li>Никаких растительных сливок, маргарина и консервантов</li>
+    <li>Индивидуальный подход — реализуем любой дизайн от мем-бенто до 4-ярусных тортов</li>
+    <li>Бережная доставка в защитных боксах с соблюдением температурного режима</li>
+  </ul>
+
+  <h2>Как мы работаем</h2>
+  <p>Принимаем заказы минимум за 2–3 дня до праздника. Для сложных многоярусных тортов — от 5 дней. Обсуждаем дизайн, начинку и вес, затем присылаем макет для согласования.</p>
+</section>
+
+<footer class="site-footer">
+  <p class="footer-text">© 2026 Торты на заказ. С любовью к каждому клиенту.</p>
+  <div class="footer-contacts">
+    <a href="https://wa.me/79170816525" class="contact-link whatsapp" target="_blank">Написать в WhatsApp</a>
+    <a href="https://t.me/ваш_username" class="contact-link telegram" target="_blank">Написать в Telegram</a>
+    <a href="https://max.ru/u/f9LHodD0cOLYQq51SfQPaaQOz8GkIMK5_IvAtXiSyLAyNAZmZk75qnrLQA4" class="contact-link max" target="_blank">Написать в MAX</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

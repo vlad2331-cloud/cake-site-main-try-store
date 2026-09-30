@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контакты — SharKOва cake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <a href="index.html" class="logo">🎂 Торты на Заказ</a>
+    <div class="header-actions">
+      <button type="button" class="header-search-btn" id="headerSearchBtn">🔍</button>
+      <a href="tel:+79881776458" class="phone">📞 +7 (988) 177-64-58</a>
+      <a href="index.html#cartContainer" class="header-cart-link">
+        <span class="cart-icon">🛒</span>
+        <span id="cartBadge" class="cart-badge">0</span>
+      </a>
+    </div>
+  </div>
+  <div class="header-search-bar" id="headerSearchBar" style="display:none;">
+    <form action="catalog.html" method="GET" class="header-search-form">
+      <input type="text" name="q" id="headerSearchInput" placeholder="Найти торт по названию..." autocomplete="off">
+      <button type="submit">Найти</button>
+    </form>
+  </div>
+  <nav class="site-nav">
+    <a href="index.html" class="nav-link">Главная</a>
+    <a href="catalog.html" class="nav-link">Каталог</a>
+    <a href="toppings.html" class="nav-link">Начинки</a>
+    <a href="stocks.html" class="nav-link">Акции</a>
+    <a href="about.html" class="nav-link">О компании</a>
+    <div class="nav-dropdown">
+      <a href="javascript:void(0)" class="nav-link nav-dropdown-toggle">Покупателям <span class="nav-arrow">▾</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="reviews.html">Отзывы</a>
+        <a href="delivery.html">Доставка и оплата</a>
+      </div>
+    </div>
+    <a href="jobs.html" class="nav-link">Вакансии</a>
+    <a href="contacts.html" class="nav-link nav-link-active">Контакты</a>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <h1>Контакты</h1>
+  <p>Свяжитесь с нами удобным способом</p>
+</section>
+
+<section class="order-section" style="max-width:800px; margin:0 auto 40px; text-align:left;">
+  <h2 style="margin-top:0;">📞 Телефон</h2>
+  <p style="font-size:18px;"><a href="tel:+79881776458" style="color:#B5704B; font-weight:600; text-decoration:none;">+7 (988) 177-64-58</a></p>
+  <p style="color:#7A6555;">Ежедневно с 9:00 до 21:00</p>
+
+  <h2>💬 Мессенджеры</h2>
+  <p><a href="https://wa.me/79170816525" style="color:#B5704B; font-weight:600; text-decoration:none;" target="_blank">WhatsApp</a> · <a href="https://t.me/ваш_username" style="color:#B5704B; font-weight:600; text-decoration:none;" target="_blank">Telegram</a> · <a href="https://max.ru/u/f9LHodD0cOLYQq51SfQPaaQOz8GkIMK5_IvAtXiSyLAyNAZmZk75qnrLQA4" style="color:#B5704B; font-weight:600; text-decoration:none;" target="_blank">MAX</a></p>
+
+  <h2>📍 Адрес</h2>
+  <p>г. Астрахань, Магистральная улица, 29</p>
+
+  <h2>🕐 График работы</h2>
+  <p>Ежедневно с 9:00 до 21:00. Заказы принимаем круглосуточно через сайт.</p>
+</section>
+
+<section class="map-section">
+  <h2>Мы на карте</h2>
+  <div class="map-container">
+    <div style="position:relative;overflow:hidden;"><iframe src="https://yandex.ru/map-widget/v1/?indoorLevel=1&ll=47.986997%2C46.411261&mode=whatshere&whatshere%5Bpoint%5D=47.984889%2C46.413024&whatshere%5Bzoom%5D=17.36&z=17.36" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p class="footer-text">© 2026 Торты на заказ. С любовью к каждому клиенту.</p>
+  <div class="footer-contacts">
+    <a href="https://wa.me/79170816525" class="contact-link whatsapp" target="_blank">Написать в WhatsApp</a>
+    <a href="https://t.me/ваш_username" class="contact-link telegram" target="_blank">Написать в Telegram</a>
+    <a href="https://max.ru/u/f9LHodD0cOLYQq51SfQPaaQOz8GkIMK5_IvAtXiSyLAyNAZmZk75qnrLQA4" class="contact-link max" target="_blank">Написать в MAX</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
