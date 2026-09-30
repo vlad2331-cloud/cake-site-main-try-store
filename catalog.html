@@ -251,36 +251,6 @@
 <!-- ===== ОСНОВНОЙ СКРИПТ ===== -->
 <script src="script.js"></script>
 
-<!-- ===== ПОИСК В ШАПКЕ ===== -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const searchBtn = document.getElementById('headerSearchBtn');
-  const searchBar = document.getElementById('headerSearchBar');
-  const searchInput = document.getElementById('headerSearchInput');
-
-  if (!searchBtn || !searchBar) {
-    console.warn('Поиск: не найден headerSearchBtn или headerSearchBar');
-    return;
-  }
-
-  searchBtn.addEventListener('click', function () {
-    const isHidden = searchBar.style.display === 'none' || !searchBar.style.display;
-    if (isHidden) {
-      searchBar.style.display = 'block';
-      if (searchInput) setTimeout(() => searchInput.focus(), 50);
-    } else {
-      searchBar.style.display = 'none';
-    }
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && searchBar.style.display === 'block') {
-      searchBar.style.display = 'none';
-    }
-  });
-});
-</script>
-
 <!-- ===== ФИЛЬТР ПО КАТЕГОРИИ И ПОИСКУ ===== -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
