@@ -1,61 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-      <!-- Подключаем дизайнерские шрифты Google Fonts -->
-    <!-- Новые премиальные шрифты из Figma -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://googleapis.com" rel="stylesheet">
+    <title>Торты на заказ в Астрахани — SharKOва cake</title>
+    <meta name="description" content="Торты на заказ в Астрахани: свадебные, детские, бенто, на день рождения. Натуральные ингредиенты, авторский декор, доставка по городу.">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="css/style.css">
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  
-    <!-- Шапка сайта -->
+
+<!-- ===== ШАПКА ===== -->
 <header class="site-header">
   <div class="header-top">
-
-    <!-- Логотип -->
     <a href="index.html" class="logo">🎂 Торты на Заказ г.Астрахань</a>
 
-    <!-- Телефон и корзина -->
-       <!-- Телефон и корзина -->
     <div class="header-actions">
-      <!-- 🔍 Кнопка-лупа — вставляем ПЕРВОЙ в header-actions -->
-      <button type="button" class="header-search-btn" id="headerSearchBtn" aria-label="Поиск">
-        🔍
-      </button>
-
+      <button type="button" class="header-search-btn" id="headerSearchBtn" aria-label="Поиск">🔍</button>
       <a href="tel:+79881776458" class="phone">📞 +7 (988) 177-64-58</a>
-
       <a href="#cartContainer" class="header-cart-link">
         <span class="cart-icon">🛒</span>
         <span id="cartBadge" class="cart-badge">0</span>
       </a>
     </div>
-
   </div>
 
-  <!-- 🔍 Поле поиска — вставляем ПОСЛЕ закрытия .header-top, но ПЕРЕД меню -->
   <div class="header-search-bar" id="headerSearchBar" style="display:none;">
     <form action="catalog.html" method="GET" class="header-search-form">
-      <input
-        type="text"
-        name="q"
-        id="headerSearchInput"
-        placeholder="Найти торт по названию..."
-        autocomplete="off"
-      >
+      <input type="text" name="q" id="headerSearchInput" placeholder="Найти торт по названию..." autocomplete="off">
       <button type="submit">Найти</button>
     </form>
   </div>
 
-  <!-- Меню растянуто по всей ширине -->
   <nav class="site-nav">
     <a href="index.html" class="nav-link nav-link-active">Главная</a>
     <a href="catalog.html" class="nav-link">Каталог</a>
@@ -78,6 +58,7 @@
   </nav>
 </header>
 
+<!-- ===== СЛАЙДЕР БАННЕРОВ ===== -->
 <section class="banner-slider" id="bannerSlider">
   <div class="banner-slider__track">
 
@@ -105,226 +86,328 @@
   <div class="banner-dots"></div>
 </section>
 
-   <h1>Создаём торты и десерты, которые становятся главным событием вашего праздника</h1> 
-   <p>Более 4 лет мы в SharKОва Cake воплощаем в жизнь любые сладкие идеи. Мы приготовили и бережно доставили более 2000 тортов: от культовых бенто-десертов до роскошных 4-ярусных свадебных шедевров. Реализуем даже самый сложный и необычный дизайн для вашего мероприятия!</p>
-   <!-- Раздел витрины тортов -->
-<!-- ===== НОВЫЙ КАТАЛОГ ТОРТОВ ===== -->
-<!-- ===== КАТАЛОГ С САЙДБАРОМ ===== -->
-<section class="catalog-section" id="catalog">
-  <div class="catalog-header">
-    <h2>Наши торты</h2>
-    <p class="catalog-subtitle">Выберите категорию слева, чтобы увидеть торты</p>
+<!-- ===== HERO-INTRO ===== -->
+<section class="hero-intro">
+  <h1>Торты, которые становятся главным событием вашего праздника</h1>
+  <p>Мы делаем торты на заказ в Астрахани с 2022 года. Натуральные ингредиенты, авторский декор, бережная доставка по городу и области.</p>
+  <div class="hero-intro__buttons">
+    <a href="catalog.html" class="btn-hero btn-hero--primary">Открыть каталог</a>
+    <a href="#order-form-section" class="btn-hero btn-hero--outline">Рассчитать заказ</a>
+  </div>
+</section>
+
+<!-- ===== СТАТИСТИКА ===== -->
+<section class="stats-bar">
+  <div class="stats-bar__item">
+    <div class="stats-bar__num">4+</div>
+    <div class="stats-bar__label">года опыта</div>
+  </div>
+  <div class="stats-bar__item">
+    <div class="stats-bar__num">2000+</div>
+    <div class="stats-bar__label">тортов испекли</div>
+  </div>
+  <div class="stats-bar__item">
+    <div class="stats-bar__num">4.9</div>
+    <div class="stats-bar__label">средний рейтинг</div>
+  </div>
+  <div class="stats-bar__item">
+    <div class="stats-bar__num">5+</div>
+    <div class="stats-bar__label">городов доставки</div>
+  </div>
+</section>
+
+<!-- ===== ГЕОГРАФИЯ ДОСТАВКИ ===== -->
+<section class="geo-section">
+  <h2>Доставляем по югу России</h2>
+  <p class="geo-subtitle">Бережно упакуем торт и отправим в другой город — заказ приедет в отличном виде</p>
+
+  <div class="geo-grid">
+    <div class="geo-card">
+      <div class="geo-card__icon">🏙️</div>
+      <h3>Астрахань</h3>
+      <p>По городу и области: 4 района + сёла. Доставка в день праздника</p>
+      <span class="geo-card__tag">от 400 ₽</span>
+    </div>
+
+    <div class="geo-card">
+      <div class="geo-card__icon">🚗</div>
+      <h3>Волгоград</h3>
+      <p>Бережно укладываем в машину, отправляем, согласуем дату и время</p>
+      <span class="geo-card__tag">межгород</span>
+    </div>
+
+    <div class="geo-card">
+      <div class="geo-card__icon">🌴</div>
+      <h3>Краснодар</h3>
+      <p>Торты для свадеб, дней рождения и корпоративов</p>
+      <span class="geo-card__tag">межгород</span>
+    </div>
+
+    <div class="geo-card">
+      <div class="geo-card__icon">🏔️</div>
+      <h3>Грозный</h3>
+      <p>Торты для больших праздников. Уточняйте сроки заранее</p>
+      <span class="geo-card__tag">межгород</span>
+    </div>
   </div>
 
-  <div class="catalog-layout">
-    <!-- ЛЕВАЯ КОЛОНКА: КАТЕГОРИИ -->
-    <aside class="catalog-sidebar">
-      <h3 class="sidebar-title">Категории</h3>
-      <ul class="category-list">
-        <li><a href="#" class="category-link active" data-category="all">Все торты</a></li>
-        <li><a href="#" class="category-link" data-category="wedding">Свадебные</a></li>
-        <li><a href="#" class="category-link" data-category="kids">Детские</a></li>
-        <li><a href="#" class="category-link" data-category="birthday">День рождения</a></li>
-        <li><a href="#" class="category-link" data-category="bento">Бенто</a></li>
-        <!-- Добавьте свои категории -->
-      </ul>
-    </aside>
+  <p class="geo-note">Собираетесь заказать в другой город? Напишите нам — обсудим доставку индивидуально.</p>
+</section>
 
-  <!-- ПРАВАЯ КОЛОНКА: СЕТКА ТОВАРОВ -->
-<div class="products-grid">
-  
-  <!-- Товар 1: Свадебный торт «Нежность» -->
-  <a href="products/wedding1.html" class="product-link" style="text-decoration:none; display:block;">
-    <div class="product-card" data-category="wedding">
-      <div class="product-image">
-        <img src="images/catalog/wedding1.jpg" alt="Свадебный торт Нежность" loading="lazy">
-        <span class="product-badge">Хит</span>
-      </div>
-      <div class="product-info">
-        <h3 class="product-title">Свадебный торт «Нежность»</h3>
-        <div class="product-info-meta">
-          <p class="product-weight">от 4 кг</p>
-          <div class="product-price">от 7 500 ₽</div>
+<!-- ===== КАТЕГОРИИ ===== -->
+<section class="categories-section">
+  <h2>Выберите категорию</h2>
+  <p class="categories-subtitle">Мы печём торты на любой случай — от бенто-десерта на двоих до 4-ярусного свадебного шедевра</p>
+
+  <div class="categories-grid">
+    <a href="catalog.html?cat=wedding" class="category-card">
+      <div class="category-card__icon">💍</div>
+      <h3>Свадебные</h3>
+      <p>Многоярусные торты с авторским декором</p>
+    </a>
+    <a href="catalog.html?cat=kids" class="category-card">
+      <div class="category-card__icon">🎈</div>
+      <h3>Детские</h3>
+      <p>С любимыми героями и съедобным декором</p>
+    </a>
+    <a href="catalog.html?cat=bento" class="category-card">
+      <div class="category-card__icon">🧁</div>
+      <h3>Бенто</h3>
+      <p>Мини-торты для двоих — от 450 г</p>
+    </a>
+    <a href="catalog.html?cat=birthday" class="category-card">
+      <div class="category-card__icon">🎂</div>
+      <h3>День рождения</h3>
+      <p>Праздничные торты на любой вкус</p>
+    </a>
+  </div>
+</section>
+
+<!-- ===== ХИТЫ ПРОДАЖ ===== -->
+<section class="hit-products-section">
+  <div class="section-head-row">
+    <h2>Хиты продаж</h2>
+    <a href="catalog.html" class="section-more-link">Смотреть все →</a>
+  </div>
+
+  <div class="products-grid products-grid--home">
+
+    <a href="products/wedding1.html" class="product-link" style="text-decoration:none; display:block;">
+      <div class="product-card">
+        <div class="product-image">
+          <img src="images/catalog/wedding1.jpg" alt="Свадебный торт Нежность" loading="lazy">
+          <span class="product-badge">Хит</span>
         </div>
-        <!-- Декоративная кнопка для сохранения единого стиля всей витрины -->
-        <button class="product-btn" onclick="event.preventDefault(); openOrderForm('Свадебный торт Нежность')">Заказать</button>
-      </div>
-    </div>
-  </a>
-
-  <!-- Товар 2: Детский торт «Соник» -->
-  <a href="products/kids_sonic.html" class="product-link" style="text-decoration:none; display:block;">
-    <div class="product-card" data-category="kids">
-      <div class="product-image">
-        <img src="images/catalog/sonic.png" alt="Детский торт Соник" loading="lazy">
-        <span class="product-badge">Популярный</span>
-      </div>
-      <div class="product-info">
-        <h3 class="product-title">Детский торт «Соник»</h3>
-        <div class="product-info-meta">
-          <p class="product-weight">от 2 кг</p>
-          <div class="product-price">от 4 200 ₽</div>
+        <div class="product-info">
+          <h3 class="product-title">Свадебный торт «Нежность»</h3>
+          <div class="product-info-meta">
+            <p class="product-weight">от 4 кг</p>
+            <div class="product-price">от 7 500 ₽</div>
+          </div>
+          <button class="product-btn" onclick="event.preventDefault(); openOrderForm('Свадебный торт Нежность')">Заказать</button>
         </div>
-        <!-- event.preventDefault() нужен, чтобы при клике на кнопку открывалась форма, а не происходил переход по ссылке -->
-        <button class="product-btn" onclick="event.preventDefault(); openOrderForm('Детский торт Соник')">Заказать</button>
       </div>
-    </div>
-  </a>
+    </a>
 
-  <!-- Товар 3: Праздничный торт «Ягодный» -->
-  <a href="products/birthday_berry.html" class="product-link" style="text-decoration:none; display:block;">
-    <div class="product-card" data-category="birthday">
-      <div class="product-image">
-        <img src="images/catalog/berry.png" alt="Праздничный торт Ягодный" loading="lazy">
-        <span class="product-badge">Новинка</span>
-      </div>
-      <div class="product-info">
-        <h3 class="product-title">Праздничный торт «Ягодный»</h3>
-        <div class="product-info-meta">
-          <p class="product-weight">от 1.5 кг</p>
-          <div class="product-price">от 3 800 ₽</div>
+    <a href="products/kids_sonic.html" class="product-link" style="text-decoration:none; display:block;">
+      <div class="product-card">
+        <div class="product-image">
+          <img src="images/catalog/sonic.png" alt="Детский торт Соник" loading="lazy">
+          <span class="product-badge">Популярный</span>
         </div>
-        <button class="product-btn" onclick="event.preventDefault(); openOrderForm('Праздничный торт Ягодный')">Заказать</button>
-      </div>
-    </div>
-  </a>
-
-  <!-- Товар 4: Бенто торт «Для двоих» -->
-  <a href="products/bento_two.html" class="product-link" style="text-decoration:none; display:block;">
-    <div class="product-card" data-category="bento">
-      <div class="product-image">
-        <img src="images/catalog/cake.jpg" alt="Бенто торт Для двоих" loading="lazy">
-      </div>
-      <div class="product-info">
-        <h3 class="product-title">Бенто торт «Для двоих»</h3>
-        <div class="product-info-meta">
-          <p class="product-weight">от 450 г</p>
-          <div class="product-price">от 1800 ₽</div>
+        <div class="product-info">
+          <h3 class="product-title">Детский торт «Соник»</h3>
+          <div class="product-info-meta">
+            <p class="product-weight">от 2 кг</p>
+            <div class="product-price">от 4 200 ₽</div>
+          </div>
+          <button class="product-btn" onclick="event.preventDefault(); openOrderForm('Детский торт Соник')">Заказать</button>
         </div>
-        <button class="product-btn" onclick="event.preventDefault(); openOrderForm('Бенто торт Для двоих')">Заказать</button>
       </div>
-    </div>
-  </a>
+    </a>
 
-   <!-- Товар 5: Детский торт «Майнкрафт» -->
-  <a href="products/kids_minekraft.html" class="product-link" style="text-decoration:none; display:block;">
-    <div class="product-card" data-category="kids">
-      <div class="product-image">
-        <img src="images/catalog/minecraft.png" alt="Детский торт Майнкрафт" loading="lazy">
-        <span class="product-badge">Популярный</span>
-      </div>
-      <div class="product-info">
-        <h3 class="product-title">Детский торт «Майнкрафт»</h3>
-        <div class="product-info-meta">
-          <p class="product-weight">от 1.5 кг</p>
-          <div class="product-price">от 3 300 ₽</div>
+    <a href="products/bento_two.html" class="product-link" style="text-decoration:none; display:block;">
+      <div class="product-card">
+        <div class="product-image">
+          <img src="images/catalog/cake.jpg" alt="Бенто торт Для двоих" loading="lazy">
+          <span class="product-badge">Хит</span>
         </div>
-        <!-- event.preventDefault() нужен, чтобы при клике на кнопку открывалась форма, а не происходил переход по ссылке -->
-        <button class="product-btn" onclick="event.preventDefault(); openOrderForm('Детский торт Майнкрафт')">Заказать</button>
-      </div>
-    </div>
-  </a>
-
-   <!-- Товар 6: Торт для мужчины «За ВДВ» -->
-  <a href="products/man_vdv.html" class="product-link" style="text-decoration:none; display:block;">
-    <div class="product-card" data-category="birthday">
-      <div class="product-image">
-        <img src="images/catalog/vdv.png" alt="Торт мужчине ВДВ" loading="lazy">
-        <span class="product-badge">Популярный</span>
-      </div>
-      <div class="product-info">
-        <h3 class="product-title">Торт для мужчины «За ВДВ»</h3>
-        <div class="product-info-meta">
-          <p class="product-weight">от 1.5 кг</p>
-          <div class="product-price">от 3 900 ₽</div>
+        <div class="product-info">
+          <h3 class="product-title">Бенто торт «Для двоих»</h3>
+          <div class="product-info-meta">
+            <p class="product-weight">от 450 г</p>
+            <div class="product-price">от 1 800 ₽</div>
+          </div>
+          <button class="product-btn" onclick="event.preventDefault(); openOrderForm('Бенто торт Для двоих')">Заказать</button>
         </div>
-        <!-- event.preventDefault() нужен, чтобы при клике на кнопку открывалась форма, а не происходил переход по ссылке -->
-        <button class="product-btn" onclick="event.preventDefault(); openOrderForm('Торт мужчине ВДВ')">Заказать</button>
       </div>
+    </a>
+
+    <a href="products/kids_minekraft.html" class="product-link" style="text-decoration:none; display:block;">
+      <div class="product-card">
+        <div class="product-image">
+          <img src="images/catalog/minecraft.png" alt="Детский торт Майнкрафт" loading="lazy">
+          <span class="product-badge">Популярный</span>
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Детский торт «Майнкрафт»</h3>
+          <div class="product-info-meta">
+            <p class="product-weight">от 1.5 кг</p>
+            <div class="product-price">от 3 300 ₽</div>
+          </div>
+          <button class="product-btn" onclick="event.preventDefault(); openOrderForm('Детский торт Майнкрафт')">Заказать</button>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ===== ПОЧЕМУ ВЫБИРАЮТ НАС ===== -->
+<section class="features-section">
+  <h2>Почему выбирают нас</h2>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-card__icon">🌿</div>
+      <h3>Натуральные ингредиенты</h3>
+      <p>Сливочное масло, фермерские сливки, бельгийский шоколад. Без растительных сливок и консервантов.</p>
     </div>
-  </a>
-</div>
-
-
-        <!-- ➕ Добавьте сюда ещё товары -->
-
-      </div>
+    <div class="feature-card">
+      <div class="feature-card__icon">🎨</div>
+      <h3>Любой дизайн</h3>
+      <p>От мем-бенто до 4-ярусных арт-объектов с ручной лепкой и подсветкой.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card__icon">🚚</div>
+      <h3>Бережная доставка</h3>
+      <p>Сами бережно укладываем в машину доставки, укрепляем, температурный режим, доставка точно в срок.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card__icon">💬</div>
+      <h3>Личный кондитер</h3>
+      <p>Обсудим детали, покажем макет, учтём все пожелания по начинке и весу.</p>
     </div>
   </div>
 </section>
 
-   <h2>Почему выбирают нас </h2>
-   <ul>
-    <li>4+ года мастерства. Наш опыт — это более 2000 успешно созданных тортов. Мы точно знаем, как ведут себя начинки, и как зафиксировать даже самый сложный 4-ярусный торт.</li>
-    <li>Исключительно натуральные ингредиенты. Мы принципиально не используем растительные сливки, дешевые маргарины, сухие смеси или искусственные консерванты. В основе наших десертов — настоящее сливочное масло, фермерские сливки, бельгийский шоколад, натуральные ягоды и фрукты. Это вкус, который восхищает и детей, и взрослых</li>
-    <li>Любой масштаб и тематика. Реализуем абсолютно любой дизайн: от трендовых мем-бенто до роскошных многоярусных арт-объектов со сложной геометрией, скрытыми подсветками или ручной лепкой</li>
-    <li>Своевременная и бережная доставка. Вам не нужно переживать за сохранность десерта. Мы доставляем торты в специальных защитных боксах с соблюдением температурного режима. Наша курьерская служба гарантирует: торт прибудет на ваше мероприятие точно в срок и в идеальном, первозданном виде</li>
-   </ul>
-  <!-- Раздел отзывов клиентов -->
-<section class="reviews-section" id="reviews">
-  <h2>Отзывы наших сладкоежек</h2>
-  <p class="reviews-subtitle">Каждый отзыв — это огромная радость для нашей кондитерской студии!</p>
+<!-- ===== КАК СДЕЛАТЬ ЗАКАЗ ===== -->
+<section class="how-section">
+  <h2>Как сделать заказ</h2>
 
-  <div class="reviews-container">
-    
-    <!-- Отзыв 1 -->
-    <div class="review-card">
-      <div class="review-header">
-        <img src="images/catalog/cake.jpg" alt="Ольга, клиент" class="review-avatar" loading="lazy">
-        <div>
-          <h3>Ольга Краснова</h3>
-          <span class="review-date">Заказывала свадебный торт</span>
-        </div>
-      </div>
-      <p class="review-text">«Это был не просто торт, а настоящий шедевр на нашей свадьбе! Все 3 яруса разлетелись за 15 минут. Начинка „Крем чиз с клубнично-банановым конфи“ — просто восторг, нежная и тает во рту. Спасибо огромное за ваш труд!»</p>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-step__num">1</div>
+      <h3>Выбираете торт</h3>
+      <p>В каталоге или обсуждаете с нами индивидуальный заказ</p>
     </div>
+    <div class="how-step">
+      <div class="how-step__num">2</div>
+      <h3>Оставляете заявку</h3>
+      <p>Через форму на сайте, WhatsApp, Telegram или MAX</p>
+    </div>
+    <div class="how-step">
+      <div class="how-step__num">3</div>
+      <h3>Согласуем детали</h3>
+      <p>Уточняем начинку, вес, декор и дату. Присылаем макет</p>
+    </div>
+    <div class="how-step">
+      <div class="how-step__num">4</div>
+      <h3>Получаете торт</h3>
+      <p>Привезём к празднику или отдадим самовывозом</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ОТЗЫВЫ ===== -->
+<section class="reviews-section" id="reviews">
+  <h2>Отзывы наших клиентов</h2>
+  <p class="reviews-subtitle">Более 20 отзывов от сладкоежек Астрахани и других городов</p>
+
+  <div class="reviews-home-grid">
+
+    <!-- Отзыв 1 -->
+    <article class="review-card-home">
+      <div class="review-card-home__photo">
+        <img src="images/catalog/wedding1.jpg" alt="Свадебный торт" loading="lazy">
+      </div>
+      <div class="review-card-home__body">
+        <div class="review-card-home__head">
+          <div class="review-avatar-wrap">
+            <div class="review-avatar--fallback">ОК</div>
+          </div>
+          <div class="review-card-home__name">
+            <h3>Ольга Краснова</h3>
+            <span>Астрахань · 12.08.2026</span>
+          </div>
+        </div>
+        <div class="review-card-home__stars">
+          <span class="stars">★★★★★</span>
+          <span class="verified-badge">✓ Проверенный заказ</span>
+        </div>
+        <p class="review-card-home__text">Это был не просто торт, а настоящий шедевр на нашей свадьбе! Все 3 яруса разлетелись за 15 минут.</p>
+      </div>
+    </article>
 
     <!-- Отзыв 2 -->
-    <div class="review-card">
-      <div class="review-header">
-        <img src="images/catalog/car.png" alt="Олег, клиент" class="review-avatar" loading="lazy">
-        <div>
-          <h3>Олег Иванов</h3>
-          <span class="review-date">Заказывал торт 3Д</span>
-        </div>
+    <article class="review-card-home">
+      <div class="review-card-home__photo">
+        <img src="images/catalog/sonic.png" alt="Детский торт Соник" loading="lazy">
       </div>
-      <p class="review-text">«Торт в виде модели нашего авто был просто шикарным, нам всё очень понравилось, так же вся семья оценила изумительный вкус, очень рекомендуем»</p>
-    </div>
+      <div class="review-card-home__body">
+        <div class="review-card-home__head">
+          <div class="review-avatar-wrap">
+            <div class="review-avatar--fallback">МС</div>
+          </div>
+          <div class="review-card-home__name">
+            <h3>Мария Смирнова</h3>
+            <span>Астрахань · 15.07.2026</span>
+          </div>
+        </div>
+        <div class="review-card-home__stars">
+          <span class="stars">★★★★★</span>
+          <span class="verified-badge">✓ Проверенный заказ</span>
+        </div>
+        <p class="review-card-home__text">Сын был в восторге от торта с Соником! Декор аккуратный, начинка не приторная. Обязательно вернёмся!</p>
+      </div>
+    </article>
 
     <!-- Отзыв 3 -->
-    <div class="review-card">
-      <div class="review-header">
-        <img src="images/catalog/sonic.png" alt="Мария, клиент" class="review-avatar" loading="lazy">
-        <div>
-          <h3>Мария Смирнова</h3>
-          <span class="review-date">Заказывала детский торт</span>
-        </div>
+    <article class="review-card-home">
+      <div class="review-card-home__photo">
+        <img src="images/catalog/cake.jpg" alt="Бенто торт" loading="lazy">
       </div>
-      <p class="review-text">«Сын был в полном восторге от торта с Соником! Весь декор сделан очень аккуратно, а начинка „Пломбирный крем с Малиново-яблочным конфи“ понравилась даже бабушке, так как торт не приторный. Обязательно вернемся ещё!»</p>
-    </div>
-
-    <!-- Отзыв 4 -->
-    <div class="review-card">
-      <div class="review-header">
-        <img src="images/catalog/minecraft.png" alt="Наталья, клиент" class="review-avatar" loading="lazy">
-        <div>
-          <h3>Наталья Быкова</h3>
-          <span class="review-date">Заказывала тематический торт</span>
+      <div class="review-card-home__body">
+        <div class="review-card-home__head">
+          <div class="review-avatar-wrap">
+            <div class="review-avatar--fallback">ЕМ</div>
+          </div>
+          <div class="review-card-home__name">
+            <h3>Екатерина Морозова</h3>
+            <span>Волгоград · 25.05.2026</span>
+          </div>
         </div>
+        <div class="review-card-home__stars">
+          <span class="stars">★★★★★</span>
+          <span class="verified-badge">✓ Проверенный заказ</span>
+        </div>
+        <p class="review-card-home__text">Заказывали в Волгоград свадебный торт. Приехал в идеальном виде, гости до сих пор вспоминают!</p>
       </div>
-      <p class="review-text">«Огромная благодарность кондитеру, сделано всё очень профессионально, красиво и очень вкусно, скоро закажем снова!»</p>
-    </div>
+    </article>
 
-  </div> <!-- /reviews-container -->
+  </div>
+
+  <div style="text-align:center; margin-top:40px;">
+    <a href="reviews.html" class="reviews-more-btn">Читать все отзывы</a>
+  </div>
 </section>
 
-  <!-- Раздел с формой заказа -->
+<!-- ===== ФОРМА ЗАКАЗА + КОРЗИНА ===== -->
 <section class="order-section" id="order-form-section">
 
   <h2>Оформление заказа</h2>
   <p>Оставьте заявку, и мы свяжемся с вами в течение 15 минут для обсуждения деталей!</p>
 
-  <!-- Блок корзины (Сюда JavaScript сам вставит выбранные торты с кнопками веса, начинками и галочками срочности) -->
   <div id="cartContainer" class="cart-container">
     <h3>🛒 Ваша корзина</h3>
     <ul id="cartItemsList" class="cart-items-list">
@@ -335,25 +418,20 @@
     </div>
   </div>
 
-  <!-- Ваша рабочая форма Formspree для отправки заявок на почту -->
   <form class="order-form" action="https://formspree.io/f/mjybdojk" method="POST">
 
-    <!-- СЮДА ДОБАВЛЯЕМ СКРЫТОЕ ПОЛЕ ДЛЯ ДЕТАЛЕЙ ЗАКАЗА -->
-  <input type="hidden" id="orderDetailsInput" name="Заказ_Детали">
+    <input type="hidden" id="orderDetailsInput" name="Заказ_Детали">
 
-    <!-- Поле для имени -->
     <div class="form-group">
       <label for="username">Ваше имя:</label>
       <input type="text" id="username" name="name" placeholder="Иван Иванов" required>
     </div>
 
-    <!-- Поле для телефона -->
     <div class="form-group">
       <label for="userphone">Номер телефона:</label>
       <input type="tel" id="userphone" name="phone" placeholder="+7 (999) 123-45-67" required>
     </div>
 
-    <!-- Блок вывода финального чека за весь заказ -->
     <div class="calculation-results" style="margin-top: 20px; text-align: left; margin-bottom: 25px;">
       <p id="resultText" style="font-weight: 500; margin-bottom: 8px; color: #7A6555;"></p>
       <h3 id="grandTotalText" style="font-family: 'Playfair Display', serif; color: #B5704B; margin-top: 15px; font-size: 22px; margin-bottom: 0;">
@@ -361,54 +439,44 @@
       </h3>
     </div>
 
-    <!-- Главная и единственная кнопка отправки формы -->
     <button type="submit" class="submit-btn">Отправить заказ в кондитерскую</button>
-
   </form>
 </section>
 
-
-<!-- Подвал сайта с контактами -->
- <!-- Раздел с картой проезда -->
+<!-- ===== КАРТА ===== -->
 <section class="map-section">
   <h2>Где забрать заказ?</h2>
   <p>Мы находимся в Астрахани. Вы можете забрать торт самостоятельно или заказать бережную доставку до вашего праздника!</p>
-  
+
   <div class="map-container">
-    <!-- Интерактивный виджет Яндекс.Карт, настроенный на Астрахань -->
-  <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/37/astrahan/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Астрахань</a><a href="https://yandex.ru/maps/37/astrahan/?indoorLevel=1&ll=47.986997%2C46.411261&mode=whatshere&utm_medium=mapframe&utm_source=maps&whatshere%5Bpoint%5D=47.984889%2C46.413024&whatshere%5Bzoom%5D=17.36&z=17.36" style="color:#eee;font-size:12px;position:absolute;top:14px;">Магистральная улица, 29 — Яндекс Карты</a><iframe src="https://yandex.ru/map-widget/v1/?indoorLevel=1&ll=47.986997%2C46.411261&mode=whatshere&whatshere%5Bpoint%5D=47.984889%2C46.413024&whatshere%5Bzoom%5D=17.36&z=17.36" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
-
-
-
+    <div style="position:relative;overflow:hidden;">
+      <a href="https://yandex.ru/maps/37/astrahan/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Астрахань</a>
+      <a href="https://yandex.ru/maps/37/astrahan/?indoorLevel=1&ll=47.986997%2C46.411261&mode=whatshere&utm_medium=mapframe&utm_source=maps&whatshere%5Bpoint%5D=47.984889%2C46.413024&whatshere%5Bzoom%5D=17.36&z=17.36" style="color:#eee;font-size:12px;position:absolute;top:14px;">Магистральная улица, 29 — Яндекс Карты</a>
+      <iframe src="https://yandex.ru/map-widget/v1/?indoorLevel=1&ll=47.986997%2C46.411261&mode=whatshere&whatshere%5Bpoint%5D=47.984889%2C46.413024&whatshere%5Bzoom%5D=17.36&z=17.36" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe>
+    </div>
   </div>
 </section>
 
+<!-- ===== ФУТЕР ===== -->
 <footer class="site-footer">
   <p class="footer-text">© 2026 Торты на заказ. С любовью к каждому клиенту.</p>
-  
-  <!-- Блок со ссылками на мессенджеры -->
+
   <div class="footer-contacts">
-    <!-- WhatsApp -->
-  <a href="https://wa.me/79170816525?text=Привет%21%20Хочу%20заказать%20торт" 
-     class="contact-link whatsapp" 
-     target="_blank" 
-     rel="noopener noreferrer">
-    <img src="images/logo/WhatsApp_logo-color-vertical.svg.webp" alt="WhatsApp" width="24" height="24" style="vertical-align: middle; margin-right: 8px;">
-    Написать в WhatsApp
-  </a>
-     <a href="https://t.me/ваш_username" 
-     class="contact-link telegram" 
-     target="_blank" 
-     rel="noopener noreferrer">
-    <img src="images/logo/Telegram_2019_Logo.svg.webp" alt="Telegram" width="24" height="24" style="vertical-align: middle; margin-right: 8px;">
-    Написать в Telegram
-  </a>
-   <a href="https://max.ru/u/f9LHodD0cOLYQq51SfQPaaQOz8GkIMK5_IvAtXiSyLAyNAZmZk75qnrLQA4" class="contact-link max" target="_blank" rel="noopener noreferrer">
-  <img src="images/logo/Логотип_MAX.svg.webp" alt="MAX" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 6px;">
-  Написать в MAX
-</a>
+    <a href="https://wa.me/79170816525?text=Привет%21%20Хочу%20заказать%20торт" class="contact-link whatsapp" target="_blank" rel="noopener noreferrer">
+      <img src="images/logo/WhatsApp_logo-color-vertical.svg.webp" alt="WhatsApp" width="24" height="24" style="vertical-align: middle; margin-right: 8px;">
+      Написать в WhatsApp
+    </a>
+    <a href="https://t.me/ваш_username" class="contact-link telegram" target="_blank" rel="noopener noreferrer">
+      <img src="images/logo/Telegram_2019_Logo.svg.webp" alt="Telegram" width="24" height="24" style="vertical-align: middle; margin-right: 8px;">
+      Написать в Telegram
+    </a>
+    <a href="https://max.ru/u/f9LHodD0cOLYQq51SfQPaaQOz8GkIMK5_IvAtXiSyLAyNAZmZk75qnrLQA4" class="contact-link max" target="_blank" rel="noopener noreferrer">
+      <img src="images/logo/Логотип_MAX.svg.webp" alt="MAX" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 6px;">
+      Написать в MAX
+    </a>
   </div>
 </footer>
+
 <script src="script.js"></script>
 
 </body>
