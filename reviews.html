@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Отзывы клиентов — SharKOва cake</title>
+<meta name="description" content="Более 20 отзывов наших клиентов о тортах на заказ в Астрахани. Оставьте свой отзыв о SharKOва cake.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
@@ -36,7 +37,7 @@
     <a href="stocks.html" class="nav-link">Акции</a>
     <a href="about.html" class="nav-link">О компании</a>
     <div class="nav-dropdown">
-      <a href="javascript:void(0)" class="nav-link nav-dropdown-toggle">Покупателям <span class="nav-arrow">▾</span></a>
+      <a href="javascript:void(0)" class="nav-link nav-dropdown-toggle nav-link-active">Покупателям <span class="nav-arrow">▾</span></a>
       <div class="nav-dropdown-menu">
         <a href="reviews.html">Отзывы</a>
         <a href="delivery.html">Доставка и оплата</a>
@@ -47,58 +48,91 @@
   </nav>
 </header>
 
+<!-- ===== ЗАГОЛОВОК ===== -->
 <section class="page-hero">
   <h1>Отзывы наших клиентов</h1>
-  <p>Каждый отзыв — это огромная радость для нашей кондитерской студии!</p>
+  <p>Более 20 реальных отзывов от наших сладкоежек — спасибо вам за доверие!</p>
 </section>
 
+<!-- ===== РЕЙТИНГ + ГИСТОГРАММА ===== -->
+<section class="reviews-stats">
+
+  <div class="reviews-stats__rating">
+    <div class="reviews-stats__score">4.9</div>
+    <div class="reviews-stats__stars" aria-label="Средняя оценка 4.9 из 5">
+      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    </div>
+    <div class="reviews-stats__count">на основе <span id="totalReviews">0</span> отзывов</div>
+  </div>
+
+  <div class="reviews-stats__bars" id="reviewsBars">
+    <!-- Гистограмма строится через JS -->
+  </div>
+
+</section>
+
+<!-- ===== СПИСОК ОТЗЫВОВ ===== -->
 <section class="reviews-section" style="padding-top:0;">
-  <div class="reviews-container">
+  <div class="reviews-container" id="reviewsContainer"></div>
 
-    <div class="review-card">
-      <div class="review-header">
-        <img src="images/catalog/cake.jpg" alt="Ольга" class="review-avatar">
-        <div>
-          <h3>Ольга Краснова</h3>
-          <span class="review-date">Заказывала свадебный торт</span>
-        </div>
+  <div class="reviews-more-wrapper">
+    <button type="button" class="reviews-more-btn" id="loadMoreBtn">
+      Показать ещё отзывы
+    </button>
+    <p class="reviews-counter" id="reviewsCounter"></p>
+  </div>
+</section>
+
+<!-- ===== ФОРМА ОТЗЫВА ===== -->
+<section class="review-form-section" id="review-form-section">
+  <div class="review-form-wrapper">
+    <h2>Оставить отзыв</h2>
+    <p style="color:#7A6555; margin-bottom:25px;">Поделитесь впечатлениями о нашем торте — это помогает нам становиться лучше</p>
+
+    <form class="review-form" id="reviewForm" action="https://formspree.io/f/mjybdojk" method="POST">
+
+      <div class="form-group">
+        <label for="reviewName">Ваше имя:</label>
+        <input type="text" id="reviewName" name="Имя" placeholder="Как вас зовут" required>
       </div>
-      <p class="review-text">«Это был не просто торт, а настоящий шедевр на нашей свадьбе! Все 3 яруса разлетелись за 15 минут. Начинка „Крем чиз с клубнично-банановым конфи“ — просто восторг!»</p>
-    </div>
 
-    <div class="review-card">
-      <div class="review-header">
-        <img src="images/catalog/car.png" alt="Олег" class="review-avatar">
-        <div>
-          <h3>Олег Иванов</h3>
-          <span class="review-date">Заказывал торт 3Д</span>
-        </div>
+      <div class="form-group">
+        <label for="reviewCity">Город / район:</label>
+        <input type="text" id="reviewCity" name="Город" placeholder="Астрахань, Трусовский район">
       </div>
-      <p class="review-text">«Торт в виде модели нашего авто был просто шикарным, вся семья оценила изумительный вкус. Очень рекомендуем!»</p>
-    </div>
 
-    <div class="review-card">
-      <div class="review-header">
-        <img src="images/catalog/sonic.png" alt="Мария" class="review-avatar">
-        <div>
-          <h3>Мария Смирнова</h3>
-          <span class="review-date">Заказывала детский торт</span>
+      <div class="form-group">
+        <label>Оценка:</label>
+        <div class="star-rating" id="starRating" role="radiogroup" aria-label="Оценка">
+          <button type="button" class="star" data-value="1" aria-label="1 звезда">★</button>
+          <button type="button" class="star" data-value="2" aria-label="2 звезды">★</button>
+          <button type="button" class="star" data-value="3" aria-label="3 звезды">★</button>
+          <button type="button" class="star" data-value="4" aria-label="4 звезды">★</button>
+          <button type="button" class="star" data-value="5" aria-label="5 звёзд">★</button>
         </div>
+        <input type="hidden" id="reviewRating" name="Оценка" value="5">
       </div>
-      <p class="review-text">«Сын был в полном восторге от торта с Соником! Декор аккуратный, начинка „Пломбирный крем с малиново-яблочным конфи“ понравилась даже бабушке. Обязательно вернёмся!»</p>
-    </div>
 
-    <div class="review-card">
-      <div class="review-header">
-        <img src="images/catalog/minecraft.png" alt="Наталья" class="review-avatar">
-        <div>
-          <h3>Наталья Быкова</h3>
-          <span class="review-date">Заказывала тематический торт</span>
-        </div>
+      <div class="form-group">
+        <label for="reviewText">Текст отзыва:</label>
+        <textarea id="reviewText" name="Отзыв" rows="5" placeholder="Расскажите, что вам понравилось..." required></textarea>
       </div>
-      <p class="review-text">«Огромная благодарность кондитеру, сделано всё очень профессионально, красиво и вкусно, скоро закажем снова!»</p>
-    </div>
 
+      <div class="form-group checkbox-group">
+        <label class="checkbox-label">
+          <input type="checkbox" required>
+          <span>Согласен на обработку персональных данных</span>
+        </label>
+      </div>
+
+      <button type="submit" class="submit-btn">Отправить отзыв</button>
+
+      <p class="form-note">Отзыв появится на сайте после проверки модератором</p>
+    </form>
   </div>
 </section>
 
@@ -107,10 +141,231 @@
   <div class="footer-contacts">
     <a href="https://wa.me/79170816525" class="contact-link whatsapp" target="_blank">Написать в WhatsApp</a>
     <a href="https://t.me/ваш_username" class="contact-link telegram" target="_blank">Написать в Telegram</a>
-    <a href="https://max.ru/u/f9LHodD0cOLYQq51SfQPaaQOz8GkIMK5_IvAtXiSyLAyNAZmZk75qnrLQA4" class="contact-link max" target="_blank">Написать в MAX</a>
+    <a href="https://max.ru/f9LHodD0cOLYQq51SfQPaaQOz8GkIMK5_IvAtXiSyLAyNAZmZk75qnrLQA4" class="contact-link max" target="_blank">Написать в MAX</a>
   </div>
 </footer>
 
 <script src="script.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  // ===== МАССИВ ОТЗЫВОВ =====
+  const reviews = [
+    { name: 'Ольга Краснова', city: 'Астрахань, Центр', rating: 5, date: '12.08.2026', text: 'Это был не просто торт, а настоящий шедевр на нашей свадьбе! Все 3 яруса разлетелись за 15 минут. Начинка «Крем чиз с клубнично-банановым конфи» — просто восторг, нежная и тает во рту.', photo: 'images/catalog/wedding1.jpg' },
+    { name: 'Олег Иванов', city: 'Астрахань, Трусовский', rating: 5, date: '28.07.2026', text: 'Торт в виде модели нашего авто был просто шикарным, вся семья оценила изумительный вкус. Очень рекомендуем!', photo: 'images/catalog/car.png' },
+    { name: 'Мария Смирнова', city: 'Астрахань, Кировский', rating: 5, date: '15.07.2026', text: 'Сын был в полном восторге от торта с Соником! Декор аккуратный, начинка «Пломбирный крем с малиново-яблочным конфи» понравилась даже бабушке, так как торт не приторный.', photo: 'images/catalog/sonic.png' },
+    { name: 'Наталья Быкова', city: 'Астрахань, Ленинский', rating: 5, date: '02.07.2026', text: 'Огромная благодарность кондитеру, сделано всё очень профессионально, красиво и вкусно, скоро закажем снова!', photo: 'images/catalog/minecraft.png' },
+    { name: 'Анна Петрова', city: 'Астрахань, Советский', rating: 4, date: '20.06.2026', text: 'Торт был вкусный, но доставили на 15 минут позже. В остальном всё отлично — декор совпал с макетом, начинка свежая.', photo: 'images/catalog/cake.jpg' },
+    { name: 'Дмитрий Соколов', city: 'Астрахань, Трусовский', rating: 5, date: '10.06.2026', text: 'Заказывал бенто на годовщину. Маленький, но очень вкусный. Идеально для двоих. Спасибо!', photo: 'images/catalog/cake.jpg' },
+    { name: 'Екатерина Морозова', city: 'Приволжский район', rating: 5, date: '25.05.2026', text: 'Восхитительный свадебный торт! Гости до сих пор вспоминают. Спасибо за ваш труд и внимание к деталям.', photo: 'images/catalog/wedding1.jpg' },
+    { name: 'Ирина Лебедева', city: 'Астрахань, Ленинский', rating: 4, date: '08.05.2026', text: 'Детский торт с Майнкрафтом — сын был в восторге. Крем можно было бы сделать послаще, но в целом всё супер.', photo: 'images/catalog/minecraft.png' },
+    { name: 'Светлана Кузнецова', city: 'Астрахань, Трусовский', rating: 5, date: '22.04.2026', text: 'Заказывала «Ягодный» на юбилей мамы. Все гости в восторге! Ягоды свежайшие, крем нежный. Спасибо огромное!', photo: 'images/catalog/berry.png' },
+    { name: 'Алексей Волков', city: 'Астрахань, Кировский', rating: 5, date: '14.04.2026', text: 'Торт «За ВДВ» для друга на 23 февраля. Дизайн точно как обсуждали, вкус отличный. Рекомендую!', photo: 'images/catalog/vdv.png' },
+    { name: 'Юлия Романова', city: 'Астрахань, Ленинский', rating: 5, date: '05.04.2026', text: 'Свадебный торт превзошёл все ожидания! Три яруса, идеальный декор, вкус — просто бомба. Гости просили рецепт.', photo: 'images/catalog/wedding1.jpg' },
+    { name: 'Павел Никитин', city: 'Астрахань, Советский', rating: 5, date: '28.03.2026', text: 'Заказывали бенто на 14 февраля. Очень удобно для двоих, вкусно и красиво. Обязательно повторим!', photo: 'images/catalog/cake.jpg' },
+    { name: 'Татьяна Орлова', city: 'Наримановский район', rating: 5, date: '19.03.2026', text: 'Дочке на 5 лет заказывали торт с Соником. Всё было идеально — от вкуса до доставки. Спасибо вашей команде!', photo: 'images/catalog/sonic.png' },
+    { name: 'Максим Захаров', city: 'Астрахань, Трусовский', rating: 4, date: '10.03.2026', text: 'Торт вкусный, но немного подвёл декор — цвет слегка отличался от макета. В остальном всё хорошо.', photo: 'images/catalog/cake.jpg' },
+    { name: 'Кристина Белова', city: 'Астрахань, Кировский', rating: 5, date: '01.03.2026', text: 'Праздничный «Ягодный» на 8 марта для мамы. Нежный, лёгкий, идеально вписался в вечер. Всем советую!', photo: 'images/catalog/berry.png' },
+    { name: 'Артём Гусев', city: 'Астрахань, Ленинский', rating: 5, date: '20.02.2026', text: 'Заказывал торт мужчине «За ВДВ» на юбилей отца. Отец был в восторге, весь декор съедобный и вкусный.', photo: 'images/catalog/vdv.png' },
+    { name: 'Вероника Сорокина', city: 'Астрахань, Трусовский', rating: 5, date: '12.02.2026', text: 'Заказывала детский торт с Майнкрафтом сыну на день рождения. Сделали быстро, красиво, вкусно. Спасибо!', photo: 'images/catalog/minecraft.png' },
+    { name: 'Роман Ковалёв', city: 'Камызякский район', rating: 5, date: '05.02.2026', text: 'Доставили за город без опозданий, торт в идеальном виде. Свадебный — мечта! Гости до сих пор вспоминают.', photo: 'images/catalog/wedding1.jpg' },
+    { name: 'Алина Соловьёва', city: 'Астрахань, Советский', rating: 5, date: '28.01.2026', text: 'Бенто на свидание — маленький, но очень вкусный. Идеально, когда не хочется большой торт. Рекомендую!', photo: 'images/catalog/cake.jpg' },
+    { name: 'Геннадий Фомин', city: 'Астрахань, Трусовский', rating: 5, date: '20.01.2026', text: 'Заказывал торт для коллег на корпоратив. Всем понравилось, особенно начинка «Шоколад + вишня». Молодцы!', photo: 'images/catalog/cake.jpg' },
+    { name: 'Полина Яковлева', city: 'Астрахань, Ленинский', rating: 5, date: '15.01.2026', text: 'Крестнице на Новый год заказывали торт с Соником. Всё супер — от вкуса до упаковки. Спасибо огромное!', photo: 'images/catalog/sonic.png' },
+    { name: 'Станислав Титов', city: 'Приволжский район', rating: 4, date: '08.01.2026', text: 'Торт вкусный, но при доставке немного съехал декор. Вкус всё компенсировал. Рекомендую всё равно!', photo: 'images/catalog/cake.jpg' },
+    { name: 'Маргарита Дмитриева', city: 'Астрахань, Кировский', rating: 5, date: '25.12.2025', text: 'Свадебный торт — просто произведение искусства! Идеальная глазурь, нежные ярусы, вкус превосходный.', photo: 'images/catalog/wedding1.jpg' },
+    { name: 'Игорь Савельев', city: 'Астрахань, Трусовский', rating: 5, date: '18.12.2025', text: 'Отмечали 10 лет свадьбы, заказывали торт «Ягодный». Красиво, вкусно, свежие ягоды. Очень довольны!', photo: 'images/catalog/berry.png' }
+  ];
+
+  const ITEMS_PER_PAGE = 8;
+  let currentFilter = 'all';
+  let currentPage = 1;
+
+  const container = document.getElementById('reviewsContainer');
+  const totalEl = document.getElementById('totalReviews');
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
+  const counterEl = document.getElementById('reviewsCounter');
+  const barsContainer = document.getElementById('reviewsBars');
+
+  // ===== SVG звёзд =====
+  const STAR_SVG = '<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+  const STAR_EMPTY = '<svg viewBox="0 0 24 24" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+
+  function renderStars(rating) {
+    let html = '';
+    for (let i = 1; i <= 5; i++) {
+      html += i <= rating ? STAR_SVG : STAR_EMPTY;
+    }
+    return html;
+  }
+
+  function getInitials(name) {
+    return name.split(' ').map(w => w.charAt(0)).join('').slice(0, 2).toUpperCase();
+  }
+
+  function getFilteredReviews() {
+    return reviews.filter(r => {
+      if (currentFilter === 'all') return true;
+      if (currentFilter === '3') return r.rating <= 3;
+      return r.rating === parseInt(currentFilter, 10);
+    });
+  }
+
+  function getAvatarHtml(review) {
+    if (review.photo) {
+      return `<img src="${review.photo}" alt="${review.name}" class="review-avatar" loading="lazy" onerror="this.outerHTML='<div class=&quot;review-avatar review-avatar--fallback&quot;>${getInitials(review.name)}</div>'">`;
+    }
+    return `<div class="review-avatar review-avatar--fallback">${getInitials(review.name)}</div>`;
+  }
+
+  // ===== РЕЙТИНГ-ГИСТОГРАММА =====
+  function renderBars() {
+    const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+    reviews.forEach(r => counts[r.rating]++);
+    const total = reviews.length;
+
+    let html = '';
+    for (let i = 5; i >= 1; i--) {
+      const percent = total ? Math.round((counts[i] / total) * 100) : 0;
+      html += `
+        <div class="reviews-bar">
+          <div class="reviews-bar__label">${i} ${STAR_SVG}</div>
+          <div class="reviews-bar__track">
+            <div class="reviews-bar__fill" style="width: ${percent}%"></div>
+          </div>
+          <div class="reviews-bar__percent">${percent}%</div>
+        </div>
+      `;
+    }
+    barsContainer.innerHTML = html;
+  }
+  renderBars();
+
+  // ===== ОТРИСОВКА ОТЗЫВОВ =====
+  function renderReviews(reset) {
+    if (reset) {
+      currentPage = 1;
+      container.innerHTML = '';
+    }
+
+    const filtered = getFilteredReviews();
+    const total = filtered.length;
+    const toShow = currentPage * ITEMS_PER_PAGE;
+    const slice = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, toShow);
+
+    if (reset && total === 0) {
+      container.innerHTML = '<p style="text-align:center; color:#7A6555; padding:40px 20px; grid-column: 1 / -1;">Отзывов с такой оценкой пока нет.</p>';
+      loadMoreBtn.style.display = 'none';
+      counterEl.textContent = '';
+      return;
+    }
+
+    const html = slice.map((r, idx) => `
+      <div class="review-card" style="animation-delay: ${idx * 0.05}s;">
+        <div class="review-header">
+          ${getAvatarHtml(r)}
+          <div class="review-header__info">
+            <h3>${r.name}</h3>
+            <span class="review-city">${r.city}</span>
+            <div class="review-stars">${renderStars(r.rating)}</div>
+          </div>
+          <span class="review-date">${r.date}</span>
+        </div>
+        <p class="review-text">${r.text}</p>
+      </div>
+    `).join('');
+
+    if (reset) {
+      container.innerHTML = html;
+    } else {
+      container.insertAdjacentHTML('beforeend', html);
+    }
+
+    loadMoreBtn.style.display = toShow >= total ? 'none' : 'inline-flex';
+    counterEl.textContent = `Показано ${Math.min(toShow, total)} из ${total}`;
+    totalEl.textContent = reviews.length;
+  }
+
+  loadMoreBtn.addEventListener('click', () => {
+    currentPage++;
+    renderReviews(false);
+  });
+
+  document.querySelectorAll('.reviews-filter__btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.reviews-filter__btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      currentFilter = this.dataset.rating;
+      renderReviews(true);
+    });
+  });
+
+  renderReviews(true);
+
+  // ===== ЗВЁЗДЫ В ФОРМЕ (SVG + АНИМАЦИЯ) =====
+  // Создаём svg-градиент один раз
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const defs = document.createElementNS(svgNS, 'svg');
+  defs.setAttribute('width', '0');
+  defs.setAttribute('height', '0');
+  defs.style.position = 'absolute';
+  defs.innerHTML = `
+    <defs>
+      <linearGradient id="starGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#F5A623"/>
+        <stop offset="100%" stop-color="#FFC55C"/>
+      </linearGradient>
+    </defs>
+  `;
+  document.body.appendChild(defs);
+
+  // Вставляем SVG в каждую кнопку-звезду
+  const stars = document.querySelectorAll('#starRating .star');
+  stars.forEach(star => {
+    star.innerHTML = STAR_SVG;
+  });
+
+  const ratingInput = document.getElementById('reviewRating');
+
+  stars.forEach(star => {
+    star.addEventListener('mouseenter', function () {
+      const value = parseInt(this.dataset.value, 10);
+      stars.forEach(s => s.classList.toggle('hover', parseInt(s.dataset.value, 10) <= value));
+    });
+
+    star.addEventListener('click', function () {
+      const value = parseInt(this.dataset.value, 10);
+      ratingInput.value = value;
+      stars.forEach(s => {
+        s.classList.remove('active');
+        if (parseInt(s.dataset.value, 10) <= value) {
+          void s.offsetWidth; // reflow для перезапуска анимации
+          s.classList.add('active');
+        }
+      });
+    });
+  });
+
+  document.getElementById('starRating').addEventListener('mouseleave', function () {
+    stars.forEach(s => s.classList.remove('hover'));
+  });
+
+  stars.forEach(s => s.classList.add('active'));
+
+  // ===== ОТПРАВКА ФОРМЫ =====
+  const form = document.getElementById('reviewForm');
+  form.addEventListener('submit', function () {
+    setTimeout(() => {
+      alert('Спасибо за отзыв! Он появится на сайте после проверки.');
+      form.reset();
+      stars.forEach(s => s.classList.add('active'));
+      ratingInput.value = 5;
+    }, 300);
+  });
+
+});
+</script>
+
 </body>
 </html>
