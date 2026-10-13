@@ -1846,29 +1846,39 @@ padding: 10px 0;
 }
 
 /* ===== КАРТОЧКИ ОТЗЫВОВ ===== */
+/* ===== КОНТЕЙНЕР ===== */
 .reviews-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 24px;
-  max-width: 900px;
+  column-count: 3;
+  column-gap: 24px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
+/* ===== КАРТОЧКА ===== */
 .review-card {
   background: #FFFFFF;
   border-radius: 20px;
   padding: 24px;
   box-shadow: 0 4px 20px rgba(44, 26, 14, 0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
   animation: reviewFadeIn 0.5s ease both;
   border: 1px solid rgba(221, 208, 191, 0.5);
+
+  /* ← ВОТ ЭТИ ТРИ СТРОКИ ВАЖНЫ ДЛЯ PINTEREST */
+  display: inline-block;        /* было flex */
+  width: 100%;                  /* на всю ширину колонки */
+  break-inside: avoid;          /* не разрывать карточку между колонками */
+  margin-bottom: 24px;          /* отступ снизу вместо gap */
+  vertical-align: top;          /* выравнивание сверху */
+
+  /* УБРАТЬ эти строки, если они есть */
+  /* flex-direction: column; */
+  /* gap: 14px; */
+  /* min-height: 200px; */
 }
 
 @keyframes reviewFadeIn {
@@ -1976,8 +1986,15 @@ padding: 10px 0;
   white-space: nowrap;
 }
 
+/* Тонкая линия между шапкой и текстом */
+.review-header {
+  padding-bottom: 14px;
+  border-bottom: 1px dashed #F0E6D8;
+  margin-bottom: 0;
+}
+
 .review-text {
-  margin: 0;
+  margin: 14px 0 0 0;
   font-size: 14px;
   color: #4a3728;
   line-height: 1.65;
@@ -2230,7 +2247,7 @@ padding: 10px 0;
   }
 
   .reviews-container {
-    grid-template-columns: 1fr;
+    column-count: 1;
     padding: 0 15px;
   }
 
@@ -2261,4 +2278,372 @@ padding: 10px 0;
     padding: 14px 32px;
     font-size: 14px;
   } 
+}
+
+/* ===== ГАЛЕРЕЯ ФОТО В КАРТОЧКЕ ОТЗЫВА ===== */
+.review-photos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #F0E6D8;
+}
+
+.review-photos img {
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  border: 2px solid #FFF8F0;
+  box-shadow: 0 2px 8px rgba(181, 112, 75, 0.10);
+  display: block;
+  flex-shrink: 0;
+}
+
+.review-photos img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(181, 112, 75, 0.25);
+  border-color: #B5704B;
+}
+
+/* ===== ПРЕВЬЮ ЗАГРУЖЕННЫХ ФОТО В ФОРМЕ ===== */
+.photo-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.photo-preview__item {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid #F0E6D8;
+  box-shadow: 0 2px 8px rgba(181, 112, 75, 0.10);
+}
+
+.photo-preview__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-preview__remove {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(181, 112, 75, 0.95);
+  color: #FFF;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.2s;
+}
+
+.photo-preview__remove:hover {
+  background: #8E5539;
+}
+
+/* Стилизация input[type="file"] */
+.review-form input[type="file"] {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #7A6555;
+  background: #FFFFFF;
+  border: 2px dashed #F0E6D8;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-sizing: border-box;
+}
+
+.review-form input[type="file"]:hover {
+  border-color: #B5704B;
+  background: #FFF8F0;
+}
+
+.review-form input[type="file"]::file-selector-button {
+  padding: 8px 16px;
+  margin-right: 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #B5704B 0%, #C98B5C 100%);
+  color: #FFF;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.review-form input[type="file"]::file-selector-button:hover {
+  opacity: 0.9;
+}
+
+/* ===== ЛАЙТБОКС ===== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(20, 12, 6, 0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: lightboxFadeIn 0.25s ease;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+@keyframes lightboxFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  object-fit: contain;
+  animation: lightboxZoomIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes lightboxZoomIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  color: #FFF;
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 4px 0;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  z-index: 2;
+}
+
+.lightbox__close:hover {
+  background: #B5704B;
+  border-color: #B5704B;
+  transform: rotate(90deg);
+}
+
+.lightbox__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  color: #FFF;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 4px 0;
+  transition: background 0.2s, border-color 0.2s;
+  z-index: 2;
+}
+
+.lightbox__arrow:hover {
+  background: #B5704B;
+  border-color: #B5704B;
+}
+
+.lightbox__arrow--prev { left: 20px; }
+.lightbox__arrow--next { right: 20px; }
+
+@media (max-width: 600px) {
+  .lightbox img { max-width: 95vw; max-height: 75vh; }
+  .lightbox__close { width: 38px; height: 38px; font-size: 22px; top: 12px; right: 12px; }
+  .lightbox__arrow { width: 40px; height: 40px; font-size: 24px; }
+  .lightbox__arrow--prev { left: 10px; }
+  .lightbox__arrow--next { right: 10px; }
+  .review-photos img { height: 70px; }
+  .photo-preview__item { width: 65px; height: 65px; }
+}
+
+/* ===== PINTEREST-СЕТКА ДЛЯ ПЛАНШЕТА ===== */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .reviews-container {
+    column-count: 2;
+  }
+}
+.review-card:last-child {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+/* ===== ПРОФЕССИОНАЛЬНЫЙ ВИД АВАТАРА ===== */
+
+/* Контейнер аватара с бейджем */
+.review-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 58px;
+  height: 58px;
+}
+
+.review-avatar-wrap img,
+.review-avatar-wrap .review-avatar--silhouette {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #FFF8F0;
+  box-shadow: 0 4px 12px rgba(181, 112, 75, 0.15);
+  display: block;
+}
+
+/* Заглушка-силуэт человека */
+.review-avatar--silhouette {
+  background: linear-gradient(135deg, #F0E6D8 0%, #E5D6C1 100%);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  color: #B5704B;
+}
+
+.review-avatar--silhouette svg {
+  width: 34px;
+  height: 34px;
+  fill: currentColor;
+  opacity: 0.55;
+}
+
+/* Синяя галочка верификации поверх аватара */
+.review-avatar-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+ background: #1E88E5 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23ffffff' d='M9 16.17l-3.88-3.88-1.41 1.41L9 19 21 7l-1.41-1.41z'/></svg>") center/10px no-repeat;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 2px 6px rgba(30, 136, 229, 0.4);
+}
+
+/* Имя + галочка в одну строку */
+.review-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+
+.review-name-row h3 {
+  margin: 0;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2C1A0E;
+  line-height: 1.2;
+}
+
+/* Маленькая галочка у имени */
+.review-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.review-verified-badge svg {
+  width: 15px;
+  height: 15px;
+  fill: #1E88E5;
+  filter: drop-shadow(0 1px 2px rgba(30, 136, 229, 0.3));
+}
+
+/* Мета: город · дата */
+.review-meta {
+  font-size: 12px;
+  color: #7A6555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+
+.review-meta__dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #C9BAA7;
+  flex-shrink: 0;
+}
+
+/* Бейдж "Проверенный заказ" под звёздами */
+.review-order-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: #E8F5E9;
+  color: #2E7D32;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 10px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.review-order-badge::before {
+  content: '✓';
+  font-size: 11px;
+  font-weight: 700;
+  color: #2E7D32;
+}
+
+/* Строка со звёздами и бейджем */
+.review-stars-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
