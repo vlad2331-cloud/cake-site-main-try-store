@@ -2905,3 +2905,13 @@ a { color: inherit; }
     box-shadow: none;
   }
 }
+
+/* ===== ФИКС БАННЕРА НА МОБИЛЬНЫХ ===== */
+@media (max-width: 768px) {
+  .hero-banner img {
+    width: 100%;
+    height: 420px; /* Ограничиваем высоту. Было ~650-700px, стало 420px */
+    object-fit: cover; /* Картинка не сплющится, а аккуратно обрежется */
+    object-position: top center; /* Оставляем верхнюю часть с акулой и логотипом */
+  }
+}
