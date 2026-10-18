@@ -17,7 +17,9 @@
 <!-- ===== ШАПКА ===== -->
 <header class="site-header">
   <div class="header-top">
-    <a href="index.html" class="logo">🎂 Торты на Заказ г.Астрахань</a>
+    <a href="index.html" class="logo">
+  <img src="images/logo.png" alt="SharKOva Cake — Торты на заказ">
+</a>
 
     <div class="header-actions">
       <button type="button" class="header-search-btn" id="headerSearchBtn" aria-label="Поиск">🔍</button>
@@ -48,32 +50,18 @@
   </nav>
 </header>
 
-<!-- ===== СЛАЙДЕР БАННЕРОВ ===== -->
-<section class="banner-slider" id="bannerSlider">
-  <div class="banner-slider__track">
-
-    <a href="catalog.html?cat=bento" class="banner-slide">
-      <img src="images/banners/1.jpg" alt="Бенто-тортики">
-    </a>
-
-    <a href="catalog.html" class="banner-slide">
-      <img src="images/banners/2.jpg" alt="Сладостей много не бывает">
-    </a>
-
-    <a href="catalog.html?cat=kids" class="banner-slide">
-      <img src="images/banners/3.jpg" alt="7 идей торта для девочки">
-    </a>
-
-    <a href="catalog.html?cat=birthday" class="banner-slide">
-      <img src="images/banners/4.jpg" alt="Торты на заказ">
-    </a>
-
-  </div>
-
-  <button class="banner-arrow banner-arrow--prev" aria-label="Назад">‹</button>
-  <button class="banner-arrow banner-arrow--next" aria-label="Вперёд">›</button>
-
-  <div class="banner-dots"></div>
+<!-- ===== БОЛЬШОЙ АДАПТИВНЫЙ БАННЕР ===== -->
+<section class="hero-banner">
+  <!-- Ссылка ведет в каталог, чтобы клик по баннеру вел к покупкам -->
+  <a href="catalog.html" aria-label="Перейти в каталог">
+    <picture>
+      <!-- Для телефонов и планшетов (ширина до 768px) -->
+      <source media="(max-width: 768px)" srcset="images/banners/banner-mobile.jpg">
+      
+      <!-- Для компьютеров (если телефон не подошел, загрузится это) -->
+      <img src="images/banners/banner-desktop.jpg" alt="SharKOva Cake — Торты на заказ в Астрахани">
+    </picture>
+  </a>
 </section>
 
 <!-- ===== HERO-INTRO ===== -->
@@ -194,7 +182,7 @@
             <p class="product-weight">от 4 кг</p>
             <div class="product-price">от 7 500 ₽</div>
           </div>
-          <button class="product-btn" onclick="event.preventDefault(); openOrderForm('Свадебный торт Нежность')">Заказать</button>
+           <button class="product-btn">Заказать</button>
         </div>
       </div>
     </a>
@@ -211,7 +199,7 @@
             <p class="product-weight">от 2 кг</p>
             <div class="product-price">от 4 200 ₽</div>
           </div>
-          <button class="product-btn" onclick="event.preventDefault(); openOrderForm('Детский торт Соник')">Заказать</button>
+          <button class="product-btn">Заказать</button>
         </div>
       </div>
     </a>
@@ -228,7 +216,7 @@
             <p class="product-weight">от 450 г</p>
             <div class="product-price">от 1 800 ₽</div>
           </div>
-          <button class="product-btn" onclick="event.preventDefault(); openOrderForm('Бенто торт Для двоих')">Заказать</button>
+          <button class="product-btn">Заказать</button>
         </div>
       </div>
     </a>
@@ -245,7 +233,7 @@
             <p class="product-weight">от 1.5 кг</p>
             <div class="product-price">от 3 300 ₽</div>
           </div>
-          <button class="product-btn" onclick="event.preventDefault(); openOrderForm('Детский торт Майнкрафт')">Заказать</button>
+          <button class="product-btn">Заказать</button>
         </div>
       </div>
     </a>
@@ -449,6 +437,12 @@
 
 <!-- ===== ФУТЕР ===== -->
 <footer class="site-footer">
+  
+  <!-- СЮДА ВСТАВЛЕН ЛОГОТИП -->
+  <a href="index.html" class="footer-logo" style="display: inline-block; margin-bottom: 20px;">
+    <img src="images/logo.png" alt="SharKOva Cake" style="height: 50px; width: auto; filter: brightness(0) invert(1); opacity: 0.9;">
+  </a>
+
   <p class="footer-text">© 2026 Торты на заказ. С любовью к каждому клиенту.</p>
 
   <div class="footer-contacts">

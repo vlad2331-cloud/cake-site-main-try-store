@@ -2802,3 +2802,106 @@ a { color: inherit; }
 @media (max-width: 480px) {
   .banner-slide img { height: 240px; }
 }
+
+/* ===== ЛОГОТИП В ШАПКЕ ===== */
+.site-header .logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.site-header .logo img {
+  height: 55px;        /* Оптимальная высота для компьютера */
+  width: auto;         /* Ширина подстроится сама, чтобы не искажать */
+  max-width: 220px;    /* Ограничитель, чтобы лого не было слишком длинным */
+  object-fit: contain; /* Сохраняет пропорции */
+  transition: transform 0.2s ease;
+}
+
+.site-header .logo img:hover {
+  transform: scale(1.03); /* Легкий эффект при наведении */
+}
+
+/* На телефонах делаем логотип чуть меньше, чтобы влезло меню */
+@media (max-width: 768px) {
+  .site-header .logo img {
+    height: 40px;      /* Чуть уменьшаем на мобильных */
+    max-width: 170px;
+  }
+}
+
+/* ===== ФИКС КНОПОК В ФУТЕРЕ ===== */
+.site-footer {
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+
+.footer-contacts {
+  display: flex;
+  flex-wrap: wrap; /* Разрешаем кнопкам переноситься на новую строку */
+  justify-content: center;
+  gap: 12px;
+  max-width: 100%;
+}
+
+.contact-link {
+  box-sizing: border-box;
+  text-align: center;
+  /* Если экран слишком узкий, кнопки встанут друг под друга */
+}
+
+@media (max-width: 768px) {
+  .footer-contacts {
+    flex-direction: column; /* На телефоне кнопки встанут в столбик */
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  
+  .contact-link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ===== БОЛЬШОЙ АДАПТИВНЫЙ БАННЕР ===== */
+.hero-banner {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 40px;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.hero-banner a {
+  display: block;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(44, 26, 14, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.hero-banner a:hover {
+  transform: scale(1.01);
+}
+
+.hero-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .hero-banner {
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  .hero-banner a {
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
