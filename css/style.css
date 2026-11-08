@@ -2910,17 +2910,18 @@ a { color: inherit; }
 @media (max-width: 768px) {
   .hero-banner img {
     width: 100%;
-    height: 420px; /* Ограничиваем высоту. Было ~650-700px, стало 420px */
-    object-fit: cover; /* Картинка не сплющится, а аккуратно обрежется */
-    object-position: top center; /* Оставляем верхнюю часть с акулой и логотипом */
+    height: 420px;
+    object-fit: cover;
+    object-position: top center;
   }
+}
 
-  /* ===== КРАСИВЫЕ ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ ===== */
+/* ===== ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ (ГЛОБАЛЬНО, ВНЕ МЕДИАЗАПРОСОВ) ===== */
 .toast-notification {
   position: fixed;
   bottom: 30px;
   right: 30px;
-  background: linear-gradient(135deg, #2E7D32 0%, #43A047 100%); /* Зеленый для успеха */
+  background: linear-gradient(135deg, #2E7D32 0%, #43A047 100%);
   color: #ffffff;
   padding: 16px 24px;
   border-radius: 12px;
@@ -2928,7 +2929,7 @@ a { color: inherit; }
   font-family: 'Source Sans 3', sans-serif;
   font-size: 15px;
   font-weight: 500;
-  z-index: 99999; /* Поверх всего */
+  z-index: 99999;
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
@@ -2943,7 +2944,6 @@ a { color: inherit; }
   transform: translateY(0);
 }
 
-/* Для ошибок цвет будет красным */
 .toast-notification.error {
   background: linear-gradient(135deg, #D32F2F 0%, #E53935 100%);
 }
@@ -2957,5 +2957,4 @@ a { color: inherit; }
     text-align: center;
     justify-content: center;
   }
-}
 }

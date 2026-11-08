@@ -608,11 +608,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ===== ОТПРАВКА ФОРМЫ С ФОТО =====
+   // ===== ОТПРАВКА ФОРМЫ С ФОТО =====
   const form = document.getElementById('reviewForm');
   
   form.addEventListener('submit', function (e) {
     e.preventDefault(); 
+
+    const submitBtn = form.querySelector('.submit-btn'); // Находим кнопку
+    const originalBtnText = submitBtn.textContent;       // Запоминаем её текст
 
     const formData = {
       name: document.getElementById('reviewName').value,
@@ -623,27 +626,40 @@ document.addEventListener('DOMContentLoaded', function () {
       photos: [] 
     };
 
+    // 1. СРАЗУ показываем плашку и блокируем кнопку
+    if (selectedFiles.length > 0) {
+      showToast('Сжимаем фото и отправляем...', false);
+    } else {
+      showToast('Отправляем отзыв...', false);
+    }
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправка...';
+    submitBtn.style.opacity = '0.7';
+
     if (selectedFiles.length === 0) {
-      sendData(formData);
+      sendData(formData, submitBtn, originalBtnText);
       return;
     }
 
-    showToast('Подготовка фото к отправке...', false);
-
+    // 2. Сжимаем фото (в фоне)
     const compressPromises = selectedFiles.map(file => compressImage(file, 1200, 0.8));
 
     Promise.all(compressPromises)
       .then(compressedPhotos => {
         formData.photos = compressedPhotos;
-        sendData(formData);
+        sendData(formData, submitBtn, originalBtnText);
       })
       .catch(err => {
         console.error(err);
         showToast('Ошибка при обработке фото', true);
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+        submitBtn.style.opacity = '1';
       });
   });
 
-  function sendData(formData) {
+  // Обновленная функция отправки
+  function sendData(formData, submitBtn, originalBtnText) {
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxfZNbUcHBCzzhdzfxeqiqBn7m935pu05W2gxjtag6Clq6zNEaqGJWoEs1M0-AsP5U3MQ/exec';
 
     fetch(scriptURL, {
@@ -652,7 +668,13 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .then(response => response.json())
     .then(data => {
+      // 3. Возвращаем кнопку в исходное состояние
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalBtnText;
+      submitBtn.style.opacity = '1';
+
       if (data.result === 'success') {
+        // Показываем успех
         showToast('Спасибо за отзыв! Он появится после проверки.', false);
         form.reset(); 
         ratingInput.value = 5;
@@ -665,6 +687,9 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .catch(error => {
       console.error('Ошибка:', error);
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalBtnText;
+      submitBtn.style.opacity = '1';
       showToast('Не удалось отправить. Проверьте интернет.', true);
     });
   }
