@@ -2914,4 +2914,48 @@ a { color: inherit; }
     object-fit: cover; /* Картинка не сплющится, а аккуратно обрежется */
     object-position: top center; /* Оставляем верхнюю часть с акулой и логотипом */
   }
+
+  /* ===== КРАСИВЫЕ ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ ===== */
+.toast-notification {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, #2E7D32 0%, #43A047 100%); /* Зеленый для успеха */
+  color: #ffffff;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  z-index: 99999; /* Поверх всего */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  max-width: 90vw;
+}
+
+.toast-notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Для ошибок цвет будет красным */
+.toast-notification.error {
+  background: linear-gradient(135deg, #D32F2F 0%, #E53935 100%);
+}
+
+@media (max-width: 600px) {
+  .toast-notification {
+    bottom: 20px;
+    right: 5vw;
+    left: 5vw;
+    max-width: 90vw;
+    text-align: center;
+    justify-content: center;
+  }
+}
 }

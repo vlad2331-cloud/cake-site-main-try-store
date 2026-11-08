@@ -74,7 +74,7 @@
 <!-- ===== СПИСОК ОТЗЫВОВ ===== -->
 <section class="reviews-section" style="padding-top:0;">
 
-  <!-- ⬇️ ВСТАВИТЬ ФИЛЬТРЫ СЮДА ⬇️ -->
+  <!-- ⬇️ ФИЛЬТРЫ ⬇️ -->
   <div class="reviews-filter">
     <button class="reviews-filter__btn active" data-rating="all">Все отзывы</button>
     <button class="reviews-filter__btn" data-rating="5">5 ★</button>
@@ -99,7 +99,7 @@
     <h2>Оставить отзыв</h2>
     <p style="color:#7A6555; margin-bottom:25px;">Поделитесь впечатлениями о нашем торте — это помогает нам становиться лучше</p>
 
-    <form class="review-form" id="reviewForm" action="https://formspree.io/f/mjybdojk" method="POST">
+    <form class="review-form" id="reviewForm">
 
       <div class="form-group">
         <label for="reviewName">Ваше имя:</label>
@@ -129,11 +129,13 @@
       </div>
 
       <div class="form-group">
-  <label for="reviewPhotos">Фото торта (до 5 штук, до 5 МБ каждое):</label>
-  <input type="file" id="reviewPhotos" name="Фото" accept="image/*" multiple>
-  <div id="photoPreview" class="photo-preview"></div>
-  <p class="form-note" style="margin-top:8px;">Фото помогут другим клиентам увидеть, как выглядит торт</p>
-</div>
+        <label for="reviewPhotos">Фото торта (до 5 штук):</label>
+        <input type="file" id="reviewPhotos" name="Фото" accept="image/*" multiple>
+        <div id="photoPreview" class="photo-preview"></div>
+        <p class="form-note" style="margin-top:8px; color:#B5704B; font-weight:600;">
+          ⚡ Пожалуйста, загружайте не больше 2-3 фото. Они автоматически сожмутся для быстрой отправки.
+        </p>
+      </div>
 
       <div class="form-group checkbox-group">
         <label class="checkbox-label">
@@ -180,159 +182,105 @@
   </div>
 </footer>
 
+<!-- Контейнер для всплывающих уведомлений -->
+<div id="toast" class="toast-notification">
+  <span id="toastText"></span>
+</div>
+
 <script src="script.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ===== МАССИВ ОТЗЫВОВ =====
-  // photos: массив путей к фото. Пример: ['images/reviews/1.jpg', 'images/reviews/2.jpg']
-  const reviews = [
-    {
-      name: 'Ольга Краснова', city: 'Астрахань, Центр', rating: 5, date: '12.08.2026',
-      text: 'Это был не просто торт, а настоящий шедевр на нашей свадьбе! Все 3 яруса разлетелись за 15 минут.',
-      photo: 'images/catalog/wedding1.jpg',
-      photos: ['images/catalog/wedding1.jpg', 'images/catalog/berry.png']
-    },
-    {
-      name: 'Олег Иванов', city: 'Астрахань, Трусовский', rating: 5, date: '28.07.2026',
-      text: 'Торт в виде модели нашего авто был просто шикарным, вся семья оценила изумительный вкус.',
-      photo: 'images/catalog/car.png',
-      photos: ['images/catalog/car.png']
-    },
-    {
-      name: 'Мария Смирнова', city: 'Астрахань, Кировский', rating: 5, date: '15.07.2026',
-      text: 'Сын был в полном восторге от торта с Соником! Декор аккуратный, начинка не приторная.',
-      photo: 'images/catalog/sonic.png',
-      photos: ['images/catalog/sonic.png']
-    },
-    {
-      name: 'Наталья Быкова', city: 'Астрахань, Ленинский', rating: 5, date: '02.07.2026',
-      text: 'Огромная благодарность кондитеру, сделано всё очень профессионально, красиво и вкусно!',
-      photo: 'images/catalog/minecraft.png',
-      photos: []
-    },
-    {
-      name: 'Анна Петрова', city: 'Астрахань, Советский', rating: 4, date: '20.06.2026',
-      text: 'Торт был вкусный, но доставили на 15 минут позже. В остальном всё отлично.',
-      photo: 'images/catalog/cake.jpg',
-      photos: ['images/catalog/cake.jpg']
-    },
-    {
-      name: 'Дмитрий Соколов', city: 'Астрахань, Трусовский', rating: 5, date: '10.06.2026',
-      text: 'Заказывал бенто на годовщину. Маленький, но очень вкусный. Идеально для двоих.',
-      photo: 'images/catalog/cake.jpg',
-      photos: []
-    },
-    {
-      name: 'Екатерина Морозова', city: 'Приволжский район', rating: 5, date: '25.05.2026',
-      text: 'Восхитительный свадебный торт! Гости до сих пор вспоминают.',
-      photo: 'images/catalog/wedding1.jpg',
-      photos: ['images/catalog/wedding1.jpg']
-    },
-    {
-      name: 'Ирина Лебедева', city: 'Астрахань, Ленинский', rating: 4, date: '08.05.2026',
-      text: 'Детский торт с Майнкрафтом — сын был в восторге.',
-      photo: 'images/catalog/minecraft.png',
-      photos: ['images/catalog/minecraft.png']
-    },
-    {
-      name: 'Светлана Кузнецова', city: 'Астрахань, Трусовский', rating: 5, date: '22.04.2026',
-      text: 'Заказывала «Ягодный» на юбилей мамы. Все гости в восторге!',
-      photo: 'images/catalog/berry.png',
-      photos: ['images/catalog/berry.png']
-    },
-    {
-      name: 'Алексей Волков', city: 'Астрахань, Кировский', rating: 5, date: '14.04.2026',
-      text: 'Торт «За ВДВ» для друга на 23 февраля. Дизайн точно как обсуждали.',
-      photo: 'images/catalog/vdv.png',
-      photos: ['images/catalog/vdv.png']
-    },
-    {
-      name: 'Юлия Романова', city: 'Астрахань, Ленинский', rating: 5, date: '05.04.2026',
-      text: 'Свадебный торт превзошёл все ожидания! Гости просили рецепт.',
-      photo: 'images/catalog/wedding1.jpg',
-      photos: []
-    },
-    {
-      name: 'Павел Никитин', city: 'Астрахань, Советский', rating: 5, date: '28.03.2026',
-      text: 'Заказывали бенто на 14 февраля. Обязательно повторим!',
-      photo: 'images/catalog/cake.jpg',
-      photos: []
-    },
-    {
-      name: 'Татьяна Орлова', city: 'Наримановский район', rating: 5, date: '19.03.2026',
-      text: 'Дочке на 5 лет заказывали торт с Соником. Всё идеально!',
-      photo: 'images/catalog/sonic.png',
-      photos: ['images/catalog/sonic.png']
-    },
-    {
-      name: 'Максим Захаров', city: 'Астрахань, Трусовский', rating: 4, date: '10.03.2026',
-      text: 'Торт вкусный, но декор слегка отличался от макета.',
-      photo: 'images/catalog/cake.jpg',
-      photos: []
-    },
-    {
-      name: 'Кристина Белова', city: 'Астрахань, Кировский', rating: 5, date: '01.03.2026',
-      text: 'Праздничный «Ягодный» на 8 марта для мамы. Нежный, лёгкий!',
-      photo: 'images/catalog/berry.png',
-      photos: ['images/catalog/berry.png']
-    },
-    {
-      name: 'Артём Гусев', city: 'Астрахань, Ленинский', rating: 5, date: '20.02.2026',
-      text: 'Заказывал торт «За ВДВ» на юбилей отца. Отец был в восторге!',
-      photo: 'images/catalog/vdv.png',
-      photos: []
-    },
-    {
-      name: 'Вероника Сорокина', city: 'Астрахань, Трусовский', rating: 5, date: '12.02.2026',
-      text: 'Заказывала Майнкрафт сыну. Сделали быстро, красиво, вкусно!',
-      photo: 'images/catalog/minecraft.png',
-      photos: ['images/catalog/minecraft.png']
-    },
-    {
-      name: 'Роман Ковалёв', city: 'Камызякский район', rating: 5, date: '05.02.2026',
-      text: 'Доставили за город без опозданий, торт в идеальном виде.',
-      photo: 'images/catalog/wedding1.jpg',
-      photos: []
-    },
-    {
-      name: 'Алина Соловьёва', city: 'Астрахань, Советский', rating: 5, date: '28.01.2026',
-      text: 'Бенто на свидание — маленький, но очень вкусный!',
-      photo: 'images/catalog/cake.jpg',
-      photos: []
-    },
-    {
-      name: 'Геннадий Фомин', city: 'Астрахань, Трусовский', rating: 5, date: '20.01.2026',
-      text: 'Заказывал торт для коллег на корпоратив. Всем понравилось!',
-      photo: 'images/catalog/cake.jpg',
-      photos: []
-    },
-    {
-      name: 'Полина Яковлева', city: 'Астрахань, Ленинский', rating: 5, date: '15.01.2026',
-      text: 'Крестнице на Новый год — торт с Соником. Спасибо огромное!',
-      photo: 'images/catalog/sonic.png',
-      photos: []
-    },
-    {
-      name: 'Станислав Титов', city: 'Приволжский район', rating: 4, date: '08.01.2026',
-      text: 'Торт вкусный, но при доставке немного съехал декор.',
-      photo: 'images/catalog/cake.jpg',
-      photos: []
-    },
-    {
-      name: 'Маргарита Дмитриева', city: 'Астрахань, Кировский', rating: 5, date: '25.12.2025',
-      text: 'Свадебный торт — произведение искусства!',
-      photo: 'images/catalog/wedding1.jpg',
-      photos: ['images/catalog/wedding1.jpg']
-    },
-    {
-      name: 'Игорь Савельев', city: 'Астрахань, Трусовский', rating: 5, date: '18.12.2025',
-      text: 'Отмечали 10 лет свадьбы, заказывали «Ягодный». Довольны!',
-      photo: 'images/catalog/berry.png',
-      photos: ['images/catalog/berry.png']
+  // ===== ЗАГРУЗКА ОТЗЫВОВ ИЗ GOOGLE ТАБЛИЦЫ =====
+  let reviews = []; 
+
+  async function loadReviews() {
+    const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSltBX8-7FGc6FGi4mQBfDs95JFDVPPvwEcdoh7el1a0q7griwwKRAZzuIbs6HDIqBV_QWungaEzIXH/pub?gid=0&single=true&output=csv';
+
+    try {
+      const response = await fetch(CSV_URL);
+      const csvText = await response.text();
+      
+      reviews = parseCSV(csvText); 
+      
+      renderBars();       
+      renderReviews(true); 
+    } catch (error) {
+      console.error('Ошибка загрузки отзывов:', error);
+      document.getElementById('reviewsContainer').innerHTML = '<p style="text-align:center; color:#7A6555; padding:40px;">Не удалось загрузить отзывы. Пожалуйста, обновите страницу позже.</p>';
     }
-  ];
+  }
+
+  function parseCSV(text) {
+    const lines = [];
+    let currentLine = [];
+    let currentCell = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      const nextChar = text[i + 1];
+
+      if (char === '"') {
+        if (inQuotes && nextChar === '"') {
+          currentCell += '"'; i++; 
+        } else {
+          inQuotes = !inQuotes;
+        }
+      } else if (char === ',' && !inQuotes) {
+        currentLine.push(currentCell);
+        currentCell = '';
+      } else if ((char === '\n' || char === '\r') && !inQuotes) {
+        if (char === '\r' && nextChar === '\n') i++;
+        currentLine.push(currentCell);
+        lines.push(currentLine);
+        currentLine = [];
+        currentCell = '';
+      } else {
+        currentCell += char;
+      }
+    }
+    if (currentCell !== '' || currentLine.length > 0) {
+      currentLine.push(currentCell);
+      lines.push(currentLine);
+    }
+
+    if (lines.length < 2) return [];
+    const headers = lines[0].map(h => h.trim().replace(/^"|"$/g, ''));
+    const result = [];
+
+    for (let i = 1; i < lines.length; i++) {
+      const row = lines[i];
+      if (row.length === 0 || (row.length === 1 && row[0] === '')) continue;
+
+      const obj = {};
+      headers.forEach((header, index) => {
+        let val = row[index] || '';
+        obj[header] = val.replace(/^"|"$/g, '').trim();
+      });
+
+      obj.rating = parseInt(obj.rating, 10) || 5;
+      
+      let photoUrls = [];
+      if (obj.photos) {
+        photoUrls = obj.photos.split(',').map(url => {
+          url = url.trim();
+          if (url.includes('drive.google.com/file/d/')) {
+            const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+            if (match && match[1]) {
+              return 'https://lh3.googleusercontent.com/d/' + match[1];
+            }
+          }
+          return url;
+        }).filter(Boolean);
+      }
+      obj.photos = photoUrls;
+      
+      if (obj.name) result.push(obj);
+    }
+    return result;
+  }
 
   const ITEMS_PER_PAGE = 8;
   let currentFilter = 'all';
@@ -353,10 +301,6 @@ document.addEventListener('DOMContentLoaded', function () {
     return html;
   }
 
-  function getInitials(name) {
-    return name.split(' ').map(w => w.charAt(0)).join('').slice(0, 2).toUpperCase();
-  }
-
   function getFilteredReviews() {
     return reviews.filter(r => {
       if (currentFilter === 'all') return true;
@@ -365,27 +309,25 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Иконка-силуэт человека (SVG)
-const SILHOUETTE_SVG = `
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-  </svg>
-`;
+  const SILHOUETTE_SVG = `
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+    </svg>
+  `;
 
-// Галочка верификации
-const VERIFIED_SVG = `
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
-  </svg>
-`;
+  const VERIFIED_SVG = `
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+    </svg>
+  `;
 
-function getAvatarHtml(review) {
-  return `
-    <div class="review-avatar-wrap">
-      <div class="review-avatar--silhouette">${SILHOUETTE_SVG}</div>
-    </div>`;
-}
-  // Галерея фото в карточке
+  function getAvatarHtml(review) {
+    return `
+      <div class="review-avatar-wrap">
+        <div class="review-avatar--silhouette">${SILHOUETTE_SVG}</div>
+      </div>`;
+  }
+
   function getPhotosHtml(review) {
     if (!review.photos || review.photos.length === 0) return '';
     const imgs = review.photos.map(src =>
@@ -394,7 +336,6 @@ function getAvatarHtml(review) {
     return `<div class="review-photos">${imgs}</div>`;
   }
 
-  // ===== РЕЙТИНГ-ГИСТОГРАММА =====
   function renderBars() {
     const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
     reviews.forEach(r => counts[r.rating]++);
@@ -411,9 +352,7 @@ function getAvatarHtml(review) {
     }
     barsContainer.innerHTML = html;
   }
-  renderBars();
-
-  // ===== ОТРИСОВКА =====
+  
   function renderReviews(reset) {
     if (reset) { currentPage = 1; container.innerHTML = ''; }
 
@@ -443,7 +382,7 @@ function getAvatarHtml(review) {
           <span class="review-meta__dot"></span>
           <span>${r.date}</span>
         </div>
-                <div class="review-stars-row">
+        <div class="review-stars-row">
           <div class="review-stars">${renderStars(r.rating)}</div>
           <span class="review-order-badge">Проверенный заказ</span>
         </div>
@@ -473,8 +412,6 @@ function getAvatarHtml(review) {
     });
   });
 
-  renderReviews(true);
-
   // ===== ЛАЙТБОКС =====
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = document.getElementById('lightboxImage');
@@ -486,7 +423,6 @@ function getAvatarHtml(review) {
   let lightboxIndex = 0;
 
   function openLightbox(src) {
-    // Собираем все фото со страницы для навигации
     const allThumbs = Array.from(document.querySelectorAll('.review-photo-thumb'));
     lightboxPhotos = allThumbs.map(t => t.dataset.lightboxSrc);
     lightboxIndex = lightboxPhotos.indexOf(src);
@@ -513,7 +449,6 @@ function getAvatarHtml(review) {
     lightboxImage.src = lightboxPhotos[lightboxIndex];
   }
 
-  // Делегирование клика по фото
   document.addEventListener('click', function (e) {
     if (e.target.classList.contains('review-photo-thumb')) {
       openLightbox(e.target.dataset.lightboxSrc);
@@ -586,16 +521,14 @@ function getAvatarHtml(review) {
   photoInput.addEventListener('change', function () {
     const files = Array.from(this.files);
     const MAX_FILES = 5;
-    const MAX_SIZE = 5 * 1024 * 1024; // 5 МБ
+    const MAX_SIZE = 5 * 1024 * 1024; 
 
-    // Ограничение по количеству
     if (files.length + selectedFiles.length > MAX_FILES) {
       alert('Можно загрузить не больше ' + MAX_FILES + ' фото');
       this.value = '';
       return;
     }
 
-    // Проверка размера
     for (const f of files) {
       if (f.size > MAX_SIZE) {
         alert('Фото «' + f.name + '» больше 5 МБ. Выберите файл поменьше.');
@@ -622,7 +555,6 @@ function getAvatarHtml(review) {
     this.value = '';
   });
 
-  // Удаление фото из превью
   photoPreview.addEventListener('click', function (e) {
     if (e.target.classList.contains('photo-preview__remove')) {
       const name = e.target.dataset.name;
@@ -631,19 +563,114 @@ function getAvatarHtml(review) {
     }
   });
 
-  // ===== ОТПРАВКА ФОРМЫ =====
-  const form = document.getElementById('reviewForm');
-  form.addEventListener('submit', function () {
+  // ===== УВЕДОМЛЕНИЯ И СЖАТИЕ =====
+  function showToast(message, isError = false) {
+    const toast = document.getElementById('toast');
+    const toastText = document.getElementById('toastText');
+    if (!toast) return;
+    
+    toastText.textContent = message;
+    if (isError) toast.classList.add('error');
+    else toast.classList.remove('error');
+    
+    toast.classList.add('show');
+    
     setTimeout(() => {
-      alert('Спасибо за отзыв! Он появится на сайте после проверки.');
-      form.reset();
-      selectedFiles = [];
-      photoPreview.innerHTML = '';
-      stars.forEach(s => s.classList.add('active'));
-      ratingInput.value = 5;
-    }, 300);
+      toast.classList.remove('show');
+    }, 4000);
+  }
+
+  function compressImage(file, maxWidth, quality) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          
+          resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+      };
+    });
+  }
+
+  // ===== ОТПРАВКА ФОРМЫ С ФОТО =====
+  const form = document.getElementById('reviewForm');
+  
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); 
+
+    const formData = {
+      name: document.getElementById('reviewName').value,
+      city: document.getElementById('reviewCity').value,
+      rating: document.getElementById('reviewRating').value,
+      date: new Date().toLocaleDateString('ru-RU'),
+      text: document.getElementById('reviewText').value,
+      photos: [] 
+    };
+
+    if (selectedFiles.length === 0) {
+      sendData(formData);
+      return;
+    }
+
+    showToast('Подготовка фото к отправке...', false);
+
+    const compressPromises = selectedFiles.map(file => compressImage(file, 1200, 0.8));
+
+    Promise.all(compressPromises)
+      .then(compressedPhotos => {
+        formData.photos = compressedPhotos;
+        sendData(formData);
+      })
+      .catch(err => {
+        console.error(err);
+        showToast('Ошибка при обработке фото', true);
+      });
   });
 
+  function sendData(formData) {
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxfZNbUcHBCzzhdzfxeqiqBn7m935pu05W2gxjtag6Clq6zNEaqGJWoEs1M0-AsP5U3MQ/exec';
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.result === 'success') {
+        showToast('Спасибо за отзыв! Он появится после проверки.', false);
+        form.reset(); 
+        ratingInput.value = 5;
+        stars.forEach(s => s.classList.add('active'));
+        selectedFiles = [];
+        photoPreview.innerHTML = '';
+      } else {
+        showToast('Ошибка: ' + data.message, true);
+      }
+    })
+    .catch(error => {
+      console.error('Ошибка:', error);
+      showToast('Не удалось отправить. Проверьте интернет.', true);
+    });
+  }
+
+  // Запускаем загрузку при открытии страницы
+  loadReviews();
 });
 </script>
 
